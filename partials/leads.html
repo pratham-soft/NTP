@@ -22,20 +22,20 @@
 			<tr>
 				<th>#</th>
                 <th> <input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()">Select </th>
-				<th>Name</th>
+                <th ng-click="sortData('fullName')"><th2>Name </th2><div ng-class="getSortClass('fullName')"></div></th>
 				<th>Mobile</th>
-                <th>Email Id</th>
-				<th>Created Date</th>
+                <th ng-click="sortData('user_email_address')"><th2>Email Id </th2><div ng-class="getSortClass('user_email_address')"></div></th>
+                <th ng-click="sortData('registration_date')"><th2>Created Date </th2><div ng-class="getSortClass('registration_date')"></div></th>
 				<th>Status</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in leads | filter:searchLead track by $index">
+			<tr ng-repeat="x in leads | orderBy:sortColumn:reverseSort">
 				<td>{{$index + 1}}</td>
                 <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
                            ng-checked="exist(x.user_id)" ></td>
-				<td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
+				<td>{{x.fullName}}</td>
 <!--				<td>Sales Team <span class="glyphicon glyphicon-circle-arrow-right"></span> Person</td>-->
                 <td>{{x.user_mobile_no}}</td>
                 <td>{{x.user_email_address}}</td>

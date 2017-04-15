@@ -64,7 +64,9 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
                     <div class="field">
-                        <label ng-show="addEmployee.employeeDob" class="show-hide">D.O.B. (YYYY-MM-DD) </label>
+                        <label ng-show="addEmployee.employeeDob" class="show-hide">
+                            <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                            D.O.B. (YYYY-MM-DD) </label>
                         <input type="text" placeholder="D.O.B. (YYYY-MM-DD) " class="form-control" name="employeeDob" ng-model="addEmployee.employeeDob" />
                     </div>
                     <div class="field">

@@ -379,6 +379,27 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
     $scope.roleIdDetails=[];
     $scope.assigntoNamesDetails=[];
     $scope.assigntoNameValue=[];
+    $scope.employees=[];
+    
+     $scope.sortColumn = "fullName";
+            $scope.reverseSort = false;
+
+            $scope.sortData = function (column) {
+                $scope.reverseSort = ($scope.sortColumn == column) ?
+                    !$scope.reverseSort : false;
+                $scope.sortColumn = column;
+            }
+
+            $scope.getSortClass = function (column) {
+
+                if ($scope.sortColumn == column) {
+                    return $scope.reverseSort
+                      ? 'arrow-down'
+                      : 'arrow-up';
+                }
+
+                return '';
+            }
     
     
         // GET THE FILE INFORMATION.
@@ -566,7 +587,6 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
     })();
 
     $scope.getEmployeesDetails = function() {
-        
         angular.element(".loader").show();
         $http({
             method: "POST",
@@ -589,9 +609,7 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                            data[i].user_role_name="Not Assigned";
                         }
                     }
-                }
-            for(var i=0;i<data.length;i++)
-                {     
+           
                     for(var j=0;j<$scope.assigntoNamesDetails.length;j++){
                     if (data[i].user_assingedto == $scope.assigntoNamesDetails[j].value)
                         {
@@ -602,7 +620,10 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                            data[i].user_assingedto_name="Not Assigned";
                         }
                     }
+                    
+                    data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
                 }
+            
             angular.element(".loader").hide();          
             $scope.employees = data;
         }).error(function() {

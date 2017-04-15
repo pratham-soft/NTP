@@ -1,7 +1,27 @@
 app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state, $window) {
     $scope.searchLead = ''; // set the default search/filter term
     $scope.selected = []; //stores checked items only
-    
+    $scope.leads=[];
+    $scope.sortColumn = "fullName";
+            $scope.reverseSort = false;
+
+            $scope.sortData = function (column) {
+                $scope.reverseSort = ($scope.sortColumn == column) ?
+                    !$scope.reverseSort : false;
+                $scope.sortColumn = column;
+            }
+
+            $scope.getSortClass = function (column) {
+
+                if ($scope.sortColumn == column) {
+                    return $scope.reverseSort
+                      ? 'arrow-down'
+                      : 'arrow-up';
+                }
+
+                return '';
+            }
+            
             // GET THE FILE INFORMATION.
         $scope.getFileDetails = function (e) {
 
@@ -66,6 +86,9 @@ app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state,
             //console.log(data);
             if (data[0].user_ErrorDesc != '-1 | User record does not exist') {
                 angular.element(".loader").hide();
+                for(var i=0;i<data.length;i++){
+                    data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
+                }
                 $scope.leads = data;
             } else {
                 angular.element(".loader").hide();
