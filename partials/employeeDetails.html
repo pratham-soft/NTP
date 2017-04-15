@@ -32,7 +32,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in employees | orderBy:sortColumn:reverseSort">
+			<tr ng-repeat="x in employees | orderBy:sortColumn:reverseSort | filter:searchEmployee">
 				<td>{{$index + 1}}</td>
                 <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
                            ng-checked="exist(x.user_id)" ></td>

@@ -20,11 +20,11 @@
             <tr>
                 <th>#</th>
                 <th><input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()">Select</th>
-                <th>Name</th>
-                <th>Lead Status</th>
-                <th>Sales Funnel</th>
-                <th>Assigned To</th>
-                <th>Created Date</th>
+                <th ng-click="sortData('fullName')"><th2>Name </th2><div ng-class="getSortClass('fullName')"></div></th>
+                <th ng-click="sortData('user_lead_status_id')"><th2>Lead Status </th2><div ng-class="getSortClass('user_lead_status_id')"></div></th>
+                <th ng-click="sortData('user_salesfunnel_name')"><th2>Sales Funnel </th2><div ng-class="getSortClass('user_salesfunnel_name')"></div></th>
+                <th ng-click="sortData('user_assingedto_name')"><th2>Assigned To </th2><div ng-class="getSortClass('user_assingedto_name')"></div></th>
+                <th ng-click="sortData('registration_date')"><th2>Created Date </th2><div ng-class="getSortClass('registration_date')"></div></th>
                 <th>Status</th>
                 <th>Actions</th>
                 <th>Site Visit</th>
@@ -32,11 +32,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in leads | filter:searchLead track by $index">
+            <tr ng-repeat="x in leads | orderBy:sortColumn:reverseSort | filter:searchLead">
                 <td>{{$index + 1}}</td>
                 <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
                            ng-checked="exist(x.user_id)" ></td>
-                <td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
+                <td>{{x.fullName}}</td>
                  <td>{{x.user_lead_status_id}}</td>
                 <td>{{x.user_salesfunnel_name}}</td>
                 <td>Sales Team <span class="glyphicon glyphicon-circle-arrow-right"></span> {{x.user_assingedto_name}}</td>
