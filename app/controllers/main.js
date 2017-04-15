@@ -16,6 +16,6 @@ app.controller("mainCtrl", function($scope, $rootScope, $http, $cookieStore, $st
         $cookieStore.remove('user_id');
         $cookieStore.remove('comp_guid');
         $cookieStore.remove('pageUrl');
-        $window.location.href = '/';
+        $window.location.href = '/Pratham/';
     };
 });

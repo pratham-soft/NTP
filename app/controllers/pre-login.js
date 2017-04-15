@@ -89,7 +89,7 @@ app.controller("login", function($scope, $http, $cookieStore, $window) {
                     if (pageUrl != undefined) {
                         $window.location.href = pageUrl;
                     } else {
-                        $window.location.href = '/home.html';
+                        $window.location.href = 'http://120.138.8.150:8080/Pratham/home.html#/';
                     }
                 }
                 angular.element(".loader").hide();
