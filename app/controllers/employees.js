@@ -377,6 +377,8 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
     $scope.selected=[];
     $scope.roleIdValues=[];
     $scope.roleIdDetails=[];
+    $scope.assigntoNamesDetails=[];
+    $scope.assigntoNameValue=[];
     
     
         // GET THE FILE INFORMATION.
@@ -430,7 +432,35 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
     
     
 
-    
+    $scope.getAssigntoNamesDetails = function() {
+        angular.element(".loader").show();
+        $http({
+            method: "POST",
+            url: "http://120.138.8.150/pratham/User/EmployeeDtls/ByUserType",
+            ContentType: 'application/json',
+            data: {
+                "user_comp_guid": $cookieStore.get('comp_guid'),
+                "user_type": 2
+            }
+        }).success(function(data) {
+             $scope.assigntoNameValue = data;            
+                for(var i=0; i<$scope.assigntoNameValue.length;i++)
+                    {
+                        $scope.obj={};   
+                        $scope.obj.name = $scope.assigntoNameValue[i].user_first_name +" " + $scope.assigntoNameValue[i].user_middle_name+" "+$scope.assigntoNameValue[i].user_last_name;
+                        $scope.obj.value = $scope.assigntoNameValue[i].user_id;
+                        $scope.assigntoNamesDetails.push($scope.obj)   
+//                        console.log("yo");    
+                    }  
+            //console.log($scope.assigntoNamesDetails);
+            angular.element(".loader").hide();          
+            $scope.employees = data;
+            $scope.getRoleIdDetails();
+        }).error(function() {
+            angular.element(".loader").hide();
+        });
+    };
+    $scope.getAssigntoNamesDetails();
     $scope.getRoleIdDetails = function() {
             angular.element(".loader").show();
             $http({
@@ -453,6 +483,7 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                     }          
 //                console.log($scope.roleIdValues);              
                 angular.element(".loader").hide();
+                $scope.getEmployeesDetails();
                   
             }).error(function() {
                 angular.element(".loader").hide();
@@ -534,8 +565,8 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
         });
     })();
 
-    ($scope.getEmployeesDetails = function() {
-        $scope.getRoleIdDetails();
+    $scope.getEmployeesDetails = function() {
+        
         angular.element(".loader").show();
         $http({
             method: "POST",
@@ -559,12 +590,25 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                         }
                     }
                 }
+            for(var i=0;i<data.length;i++)
+                {     
+                    for(var j=0;j<$scope.assigntoNamesDetails.length;j++){
+                    if (data[i].user_assingedto == $scope.assigntoNamesDetails[j].value)
+                        {
+                           data[i].user_assingedto_name=$scope.assigntoNamesDetails[j].name;
+                        }
+                     if (data[i].user_assingedto == "0")
+                        {
+                           data[i].user_assingedto_name="Not Assigned";
+                        }
+                    }
+                }
             angular.element(".loader").hide();          
             $scope.employees = data;
         }).error(function() {
             angular.element(".loader").hide();
         });
-    })();
+    };
     
 
     
