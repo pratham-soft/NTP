@@ -61,6 +61,8 @@
                         <label ng-show="addEmployee.employeeAddress" class="show-hide">Adress </label>
                         <input type="text" placeholder="Adress" class="form-control" name="employeeAddress" ng-model="addEmployee.employeeAddress"  />
                     </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
                     <div class="field">
                         <label ng-show="addEmployee.employeeDob" class="show-hide">D.O.B. (YYYY-MM-DD) </label>
                         <input type="text" placeholder="D.O.B. (YYYY-MM-DD) " class="form-control" name="employeeDob" ng-model="addEmployee.employeeDob" />
@@ -76,22 +78,6 @@
                     <div class="field">
                         <label ng-show="addEmployee.employeeHobbies" class="show-hide">Hobbies </label>
                         <input type="text" placeholder="Hobbies " class="form-control" name="employeeHobbies" ng-model="addEmployee.employeeHobbies"  />
-                    </div>
-                    <div class="field">
-                        <label ng-show="addEmployee.employeeReference1Name" class="show-hide">Reference 1 Name </label>
-                        <input type="text" placeholder="Reference 1 Name " class="form-control" name="employeeReference1Name" ng-model="addEmployee.employeeReference1Name"  />
-                    </div>
-                    <div class="field">
-                        <label ng-show="addEmployee.employeeReference1ContactNumber" class="show-hide">Reference 1 Contact Number </label>
-                        <input type="text" placeholder="Reference 1 Contact Number " class="form-control" name="employeeReference1ContactNumber" ng-model="addEmployee.employeeReference1ContactNumber"  />
-                    </div>
-                    <div class="field">
-                        <label ng-show="addEmployee.employeeReference1Email" class="show-hide">Reference 1 Email Address </label>
-                        <input type="email" placeholder="Reference 1 Email Address " class="form-control" name="employeeReference1Email" ng-model="addEmployee.employeeReference1Email"  />
-                    </div>
-                    <div class="field">
-                        <label ng-show="addEmployee.employeeReference1Address" class="show-hide">Reference 1 Address </label>
-                        <input type="text" placeholder="Reference 1 Address " class="form-control" name="employeeReference1Address" ng-model="addEmployee.employeeReference1Address"  />
                     </div>
                     <div class="field">
                         <label ng-show="addEmployee.employeeSpouseName" class="show-hide">Spouse Name </label>
@@ -131,9 +117,14 @@
                 </div>
                 <div id="children"></div>
                 </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center ctaContainer">
+                    <button class="btn btn-primary" type="button"  ng-click="tab = 2">Next</button>
+                </div>
             </div>
+        
 			<div ng-show="tab === 2" class="tab-pane"> 
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="field">
                     <label ng-show="addEmployee.employeeRole" class="show-hide">Role</label>
                     <select class="form-control" name="employeeRole" ng-model="addEmployee.employeeRole" >
@@ -167,16 +158,54 @@
                     </option>
                  </select>
                 </div>
-               
                 <div class="field">
                     <label ng-show="addEmployee.employeeSourceOfRecruit" class="show-hide">Source Of Recruitment </label>
                     <input type="text" placeholder="Source Of Recruitment " class="form-control" name="employeeSourceOfRecruit" ng-model="addEmployee.employeeSourceOfRecruit"  />
+                    </div></div>
+             </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
+                <div class="field">
+                        <label ng-show="addEmployee.employeeReference1Name" class="show-hide">Reference 1 Name </label>
+                        <input type="text" placeholder="Reference 1 Name " class="form-control" name="employeeReference1Name" ng-model="addEmployee.employeeReference1Name"  />
+                    </div>
+                    <div class="field">
+                        <label ng-show="addEmployee.employeeReference1ContactNumber" class="show-hide">Reference 1 Contact Number </label>
+                        <input type="text" placeholder="Reference 1 Contact Number " class="form-control" name="employeeReference1ContactNumber" ng-model="addEmployee.employeeReference1ContactNumber"  />
+                    </div>
+                    <div class="field">
+                        <label ng-show="addEmployee.employeeReference1Email" class="show-hide">Reference 1 Email Address </label>
+                        <input type="email" placeholder="Reference 1 Email Address " class="form-control" name="employeeReference1Email" ng-model="addEmployee.employeeReference1Email"  />
+                    </div>
+                    <div class="field">
+                        <label ng-show="addEmployee.employeeReference1Address" class="show-hide">Reference 1 Address </label>
+                        <input type="text" placeholder="Reference 1 Address " class="form-control" name="employeeReference1Address" ng-model="addEmployee.employeeReference1Address"  />
+                    </div>
                 </div>
-
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
+                    <div class="field">
+                    <label ng-show="addEmployee.employeeReference2Name" class="show-hide">Reference 2 Name </label>
+                    <input type="text" placeholder="Reference 2 Name " class="form-control" name="employeeReference2Name" ng-model="addEmployee.employeeReference2Name"  />
+                </div>
+                <div class="field">
+                    <label ng-show="addEmployee.employeeReference2ContactNumber" class="show-hide">Reference 2 Contact Number </label>
+                    <input type="text" placeholder="Reference 2 Contact Number " class="form-control" name="employeeReference2ContactNumber" ng-model="addEmployee.employeeReference2ContactNumber"  />
+                </div>
+                <div class="field">
+                    <label ng-show="addEmployee.employeeReference2Email" class="show-hide">Reference 2 Email Address </label>
+                    <input type="email" placeholder="Reference 2 Email Address " class="form-control" name="employeeReference2Email" ng-model="addEmployee.employeeReference2Email" />
+                </div>
+                <div class="field">
+                    <label ng-show="addEmployee.employeeReference2Address" class="show-hide">Reference 2 Address </label>
+                    <input type="text" placeholder="Reference 2 Address " class="form-control" name="employeeReference2Address" ng-model="addEmployee.employeeReference2Address" />
+                </div>
+                </div>
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center ctaContainer">
+                    <button class="btn btn-primary" type="button"  ng-click="tab = 3">Next</button>
+               
             </div>
             </div>
 			<div ng-show="tab === 3" class="tab-pane"> 
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
                        <div class="field">
                     <label ng-show="addEmployee.employeePanNumber" class="show-hide">Pan Number </label>
                     <input type="text" placeholder="Pan Number " class="form-control" name="employeePanNumber" ng-model="addEmployee.employeePanNumber"  />
@@ -194,9 +223,8 @@
                     <label ng-show="addEmployee.employeeNetSalary" class="show-hide">Net Salary </label>
                     <input type="number" placeholder="Net Salary " class="form-control" name="employeeNetSalary" ng-model="addEmployee.employeeNetSalary"  />
                 </div>
-                <!--<div>
-                 <input type="text" placeholder="Designation *" class="form-control" name="employeeDesignation" ng-model="addEmployee.employeeDesignation" ng-required="true" ng-class="{blankInput: addEmployeeForm.employeeDesignation.$error.required &amp;&amp; submit}"/>
-              </div>-->
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
                 <div class="field">
                     <label ng-show="addEmployee.employeeBankName" class="show-hide">Bank Name </label>
                     <input type="text" placeholder="Bank Name " class="form-control" name="employeeBankName" ng-model="addEmployee.employeeBankName"  />
@@ -217,22 +245,8 @@
                     <label ng-show="addEmployee.employeeBankIfscCode" class="show-hide">Bank Ifsc Code </label>
                     <input type="text" placeholder="Bank Ifsc Code " class="form-control" name="employeeBankIfscCode" ng-model="addEmployee.employeeBankIfscCode"  />
                 </div>
-                <div class="field">
-                    <label ng-show="addEmployee.employeeReference2Name" class="show-hide">Reference 2 Name </label>
-                    <input type="text" placeholder="Reference 2 Name " class="form-control" name="employeeReference2Name" ng-model="addEmployee.employeeReference2Name"  />
-                </div>
-                <div class="field">
-                    <label ng-show="addEmployee.employeeReference2ContactNumber" class="show-hide">Reference 2 Contact Number </label>
-                    <input type="text" placeholder="Reference 2 Contact Number " class="form-control" name="employeeReference2ContactNumber" ng-model="addEmployee.employeeReference2ContactNumber"  />
-                </div>
-                <div class="field">
-                    <label ng-show="addEmployee.employeeReference2Email" class="show-hide">Reference 2 Email Address </label>
-                    <input type="email" placeholder="Reference 2 Email Address " class="form-control" name="employeeReference2Email" ng-model="addEmployee.employeeReference2Email" />
-                </div>
-                <div class="field">
-                    <label ng-show="addEmployee.employeeReference2Address" class="show-hide">Reference 2 Address </label>
-                    <input type="text" placeholder="Reference 2 Address " class="form-control" name="employeeReference2Address" ng-model="addEmployee.employeeReference2Address" />
-                </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center ctaContainer">       
         <button type="button" class="btn btn-success" ng-click="addEmployee(addEmployee,'addEmployeeForm')" ng-show="addEmployeeBtn">Save Employee</button>
         <button type="button" class="btn btn-success" ng-click="editEmployee(addEmployee,'addEmployeeForm')" ng-show="editEmployeeBtn">Update Employee</button>
     </div>
