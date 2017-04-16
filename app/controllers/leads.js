@@ -1,7 +1,7 @@
 app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state, $window) {
     $scope.searchLead = ''; // set the default search/filter term
     $scope.selected = []; //stores checked items only
-    $scope.leads=[];    
+    $scope.leads=[];
     
     $scope.sortColumn = "fullName";
             $scope.reverseSort = false;

@@ -1,5 +1,28 @@
 app.controller("customerController", function($scope, $http, $cookieStore, $state, $uibModal) {
-    ($scope.getCustomers = function() {
+        $scope.customers=[];
+        $scope.sortColumn = "fullName";
+        $scope.reverseSort = false;
+
+            $scope.sortData = function (column) {
+                $scope.reverseSort = ($scope.sortColumn == column) ?
+                    !$scope.reverseSort : false;
+                $scope.sortColumn = column;
+            }
+
+            $scope.getSortClass = function (column) {
+
+                if ($scope.sortColumn == column) {
+                    return $scope.reverseSort
+                      ? 'arrow-down'
+                      : 'arrow-up';
+                }
+
+                return '';
+            }
+    
+    
+    
+    $scope.getCustomers = function() {
         angular.element(".loader").show();
         $http({
             method: "POST",
@@ -12,11 +35,15 @@ app.controller("customerController", function($scope, $http, $cookieStore, $stat
         }).success(function(data) {
             //console.log(data);
             angular.element(".loader").hide();
+            for(var i=0;i<data.length;i++){
+                    data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
+                }
             $scope.customers = data;
         }).error(function() {
             angular.element(".loader").hide();
         });
-    })();
+    };
+    $scope.getCustomers();
 
     $scope.customerDetail = function(selectedItem) {
         var modalInstance = $uibModal.open({
