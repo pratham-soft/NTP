@@ -1,5 +1,4 @@
 app.controller("customerController", function($scope, $http, $cookieStore, $state, $uibModal) {
-        $scope.customers=[];
         $scope.sortColumn = "fullName";
         $scope.reverseSort = false;
 
@@ -19,8 +18,6 @@ app.controller("customerController", function($scope, $http, $cookieStore, $stat
 
                 return '';
             }
-    
-    
     
     $scope.getCustomers = function() {
         angular.element(".loader").show();
