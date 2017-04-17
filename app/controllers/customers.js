@@ -50,7 +50,7 @@ app.controller("customerController", function($scope, $http, $cookieStore, $stat
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.customers[selectedItem];
+                    return selectedItem;
                 }
             }
         });

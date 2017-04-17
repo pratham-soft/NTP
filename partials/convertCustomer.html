@@ -35,16 +35,19 @@
          <input type="email" ng-disabled="true" placeholder="Email ID*" title="Email ID*" class="form-control" name="emailId" ng-model="customer.emailId" ng-required="true" ng-class="{blankInput: addCustomerForm.emailId.$error.required &amp;&amp; submit}"/>
       </div>
       <div class="field">
-         <label ng-show="customer.dob" class="show-hide">D.O.B. (YYYY-MM-DD)</label>
-         <input type="text" ng-disabled="true" placeholder="D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="dob" ng-model="customer.dob"/>
-      </div>
+         <label ng-show="customer.dob" class="show-hide">D.O.B. (DD/MM/YYYY)</label>
+         <datepicker date-format="dd/MM/yyyy" >
+              <input type="text" ng-disabled="true" placeholder="D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="dob" ng-model="customer.dob"/>  
+                <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+         </datepicker>
+      </div><br>
       <div class="radioBtn">
          <span>Gender:</span>
          <input type="radio" name="gender" ng-disabled="true" ng-model="customer.gender" id="male" value="0"/>
          <label for="male">Male</label> <span>|</span>
          <input type="radio" name="gender" ng-disabled="true" ng-model="customer.gender" id="female" value="1"/>
          <label for="female">Female</label>
-      </div>
+      </div><br>
       <div class="field">
          <label ng-show="customer.country" class="show-hide">Select Country</label>
          <select class="form-control" ng-disabled="true" name="country" ng-model="customer.country" title="Country">
@@ -175,8 +178,11 @@
       </div>
       <div class="field">
          <label ng-show="customer.spouseDob" class="show-hide">Spouse Dob</label>
-         <input type="text" placeholder="Spouse Dob" title="Spouse Dob" class="form-control"  name="spouseDob" ng-model="customer.spouseDob"/>
-      </div>
+          <datepicker date-format="dd/MM/yyyy" >
+              <input type="text" placeholder="Spouse Dob" title="Spouse Dob" class="form-control"  name="spouseDob" ng-model="customer.spouseDob"/>
+                <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+         </datepicker>
+      </div><br>
       <div class="field">
          <label ng-show="customer.spousePan" class="show-hide">Spouse Pan</label>
          <input type="text" placeholder="PAN" title="PAN" class="form-control"  name="spousePan" ng-model="customer.spousePan"/>
@@ -187,8 +193,11 @@
       </div>
       <div class="field">
          <label ng-show="customer.weddingAnniversary" class="show-hide">Wedding Anniversary</label>
-         <input type="text" placeholder="Wedding Anniversary" title="Wedding Anniversary" class="form-control"  name="weddingAnniversary" ng-model="customer.weddingAnniversary"/>
-      </div>
+          <datepicker date-format="dd/MM/yyyy" >
+               <input type="text" placeholder="Wedding Anniversary" title="Wedding Anniversary" class="form-control"  name="weddingAnniversary" ng-model="customer.weddingAnniversary"/>
+                <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+         </datepicker>
+      </div><br><br>
       <div class="field">
          <label ng-show="customer.childrenNo" class="show-hide">No. of Children</label>
          <select class="form-control" name="childrenNo" ng-model="customer.childrenNo" title="No. of Children" ng-change="appendFields()">
@@ -219,7 +228,7 @@
          <span>|</span>
          <input type="radio" name="bankloan" ng-model="customer.bankloan" id="no" value="0"/>
          <label for="no">No</label>
-      </div>
+      </div><br>
       <div ng-show="customer.bankloan == 1">
          <div class="field">
             <label ng-show="customer.bankName" class="show-hide">Bank Name</label>
@@ -249,7 +258,7 @@
          <span>|</span>
          <input type="radio" name="gpaHolder" ng-model="customer.gpaHolder" id="gpaHolderno" value="0"/>
          <label for="gpaHolderno">No</label>
-      </div>
+      </div><br>
       <div ng-show="customer.gpaHolder == 1">
          <div class="field">
             <label ng-show="customer.gpaRelation" class="show-hide">Gpa Relation Type</label>
@@ -274,8 +283,11 @@
          </div>
          <div class="field">
             <label ng-show="customer.gpaDob" class="show-hide">GPA D.O.B. (YYYY-MM-DD)</label>
-            <input type="text"  placeholder="GPA D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="gpaDob" ng-model="customer.gpaDob"/>
-         </div>
+             <datepicker date-format="dd/MM/yyyy" >
+                          <input type="text"  placeholder="GPA D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="gpaDob" ng-model="customer.gpaDob"/>
+                <i class="form-control-feedback glyphicon glyphicon-calendar"></i>
+         </datepicker>
+         </div><br>
          <div class="field">
              <label ng-show="customer.gpaAddress" class="show-hide">Address</label>
             <input type="text" placeholder="Address" title="Address" class="form-control"  name="gpaAddress" ng-model="customer.gpaAddress"/>

@@ -31,7 +31,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in leads | orderBy:sortColumn:reverseSort | filter:searchLead">
+			<tr ng-repeat="x in leads | orderBy:sortColumn:reverseSort | filter:searchLead ">
 				<td>{{$index + 1}}</td>
                 <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
                            ng-checked="exist(x.user_id)" ></td>
@@ -40,7 +40,7 @@
                 <td>{{x.user_mobile_no}}</td>
                 <td>{{x.user_email_address}}</td>
                 <td>{{x.registration_date | date:'yyyy-MM-dd'}}</td>
-				<td><span class="link" ng-click="leadDetail($index)">View</span></td>
+				<td><span class="link" ng-click="leadDetail(x)">View</span></td>
 				<td><a ui-sref="/EditLead({ leadID: {{x.user_id}} })"><span class="link">Edit</span></a></td>
 			</tr>
 		</tbody>

@@ -290,7 +290,7 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.agents[selectedItem];
+                    return selectedItem;
                 }
             }
         });

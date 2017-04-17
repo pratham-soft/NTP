@@ -133,6 +133,24 @@ app.controller("convertCustomer", function($scope, $http, $compile, $cookieStore
 
     $scope.addCustomer = function(formObj, formName) {
         $scope.submit = true;
+        
+        var dobspouse = formObj.spouseDob;
+        var newdobspouse = date.split("/").reverse().join("-");
+        
+        var dobgpa = formObj.gpaDob;
+        var newdobgpa = date.split("/").reverse().join("-");
+        
+         var wedAnniversary = formObj.weddingAnniversary;
+        var newwedAnniversary = date.split("/").reverse().join("-");
+        
+        var dobchild1 = formObj.child1Dob;
+        var newdobchild1 = date.split("/").reverse().join("-");
+        var dobchild2 = formObj.child2Dob;
+        var newdobchild2 = date.split("/").reverse().join("-");
+        var dobchild3 = formObj.child3Dob;
+        var newdobchild3 = date.split("/").reverse().join("-");
+        var dobchild4 = formObj.child4Dob;
+        var newdobchild4 = date.split("/").reverse().join("-");
 
         if ($scope[formName].$valid) {
             angular.element(".loader").show();
@@ -181,19 +199,19 @@ app.controller("convertCustomer", function($scope, $http, $compile, $cookieStore
                     "Cust_off_add": formObj.officeAddress,
                     "Cust_off_email": formObj.officeEmailId,
                     "Cust_spouse_nm": formObj.spouseName,
-                    "Cust_spouse_dob": formObj.spouseDob,
+                    "Cust_spouse_dob": newdobspouse,
                     "Cust_spouse_pan": formObj.spousePan,
                     "Cust_spouse_aadhar": formObj.spouseAadhar,
                     "Cust_noof_childrn": noOfChildren,
                     "Cust_child1_nm": formObj.child1Name,
-                    "Cust_child1_dob": formObj.child1Dob,
+                    "Cust_child1_dob":newdobchild1 ,
                     "Cust_child2_nm": formObj.child2Name,
-                    "Cust_child2_dob": formObj.child2Dob,
+                    "Cust_child2_dob": newdobchild2,
                     "Cust_child3_nm": formObj.child3Name,
-                    "Cust_child3_dob": formObj.child3Dob,
+                    "Cust_child3_dob": newdobchild3,
                     "Cust_child4_nm": formObj.child4Name,
-                    "Cust_child4_dob": formObj.child4Dob,
-                    "Cust_wedanv": formObj.weddingAnniversary,
+                    "Cust_child4_dob": newdobchild4,
+                    "Cust_wedanv": newwedAnniversary,
                     "Cust_bankloan": formObj.bankloan,
                     "Cust_banknm": formObj.bankName,
                     "Cust_bankaccno": formObj.accountNumber,
@@ -203,7 +221,7 @@ app.controller("convertCustomer", function($scope, $http, $compile, $cookieStore
                     "Cust_gpaholdr": formObj.gpaHolder,
                     "Cust_gpa_nm": formObj.gpaName,
                     "Cust_gpa_relationtype": gpaRelation,
-                    "Cust_gpa_dob": formObj.gpaDob,
+                    "Cust_gpa_dob": newdobgpa,
                     "Cust_gpa_add": formObj.gpaAddress,
                     "Cust_gpa_permadd": formObj.permanentAddress,
                     "Cust_gpa_reltnwithcusty": formObj.relationWithcustomer,
@@ -223,13 +241,16 @@ app.controller("convertCustomer", function($scope, $http, $compile, $cookieStore
     $scope.appendFields = function() {
         angular.element("#children").html('');
         for (i = 1; i <= $scope.customer.childrenNo; i++) {
-            var childDiv = '<div class="field"><label ng-show="customer.child' + i + 'Name" class="show-hide">Child ' + i + ' Name</label><input type="text" placeholder="Child ' + i + ' Name" title="Child ' + i + ' Name" class="form-control" name="child' + i + 'Name" ng-model="customer.child' + i + 'Name" /></div><div class="field"><label ng-show="customer.child' + i + 'Dob" class="show-hide">Child ' + i + ' D.O.B.</label><input type="text" placeholder="Child ' + i + ' D.O.B. (YYYY-DD-MM)" title="Child ' + i + ' D.O.B." class="form-control" name="child' + i + 'Dob" ng-model="customer.child' + i + 'Dob"/></div>';
+            var childDiv =  '<div class="field"><label ng-show="customer.child' + i + 'Name" class="show-hide">Child ' + i + ' Name*</label><input type="text" placeholder="Child ' + i + ' Name" title="Child ' + i + ' Name" class="form-control" name="child' + i + 'Name" ng-model="customer.child' + i + 'Name" /></div><div class="field has-feedback"><label ng-show="customer.child' + i + 'Dob" class="show-hide">Child ' + i + ' D.O.B. (DD/MM/YYYY)</label><datepicker date-format="dd/MM/yyyy"><input type="text" placeholder="Child ' + i + ' D.O.B. (DD/MM/YYYY)" title="Child ' + i + ' D.O.B." class="form-control" name="child' + i + 'Dob" ng-model="customer.child' + i + 'Dob"/><i class="form-control-feedback glyphicon glyphicon-calendar"></i></datepicker></div><br>';
             var childDivComplied = $compile(childDiv)($scope);
             angular.element("#children").append(childDivComplied);
 
         }
     };
-
+    
+    
+    
+    
     function editAppendFields() {
         angular.element("#children").html('');
         for (i = 1; i <= $scope.customer.childrenNo; i++) {
