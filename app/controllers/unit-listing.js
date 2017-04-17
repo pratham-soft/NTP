@@ -1,6 +1,7 @@
 app.controller("unitsListingController", function($scope, $http, $cookieStore, $state, $uibModal,$window) {
     $scope.unitStatus = ['vacant', 'userinterest', 'mgmtquota', 'blockedbyadvnc', 'blockedbynotadvnc', 'sold'];
     $scope.unitStatusText = ['Vacant', 'User Interested', 'Management Quota', 'Blocked By Paying Advance', 'Blocked By Not Paying Advance', 'Sold'];
+    
      $scope.selected = []; //stores checked items only
     (
         
@@ -98,19 +99,19 @@ app.controller("unitsListingController", function($scope, $http, $cookieStore, $
             //              console.log($scope.selected);
         }
     };
+   
      $scope.unitStatusBtnClick = function(obj, formName) {
         var str = "" + $scope.selected;
         var untstat ='';
          if ($scope.projectDetails.unitstatus == 1)
              {
-                 untstat = 3;
+                 untstat = 3;                 
              }
              
          else if ($scope.projectDetails.unitstatus == 3)
              {
                  untstat = 1;
              }             
-         
             
         if (str != "") {
             angular.element(".loader").show();
@@ -142,8 +143,11 @@ app.controller("unitsListingController", function($scope, $http, $cookieStore, $
         }
     } //leadToProspectBtnClick end
 
-    $scope.getUnitAllocation = function(obj, formName) {
+    $scope.getUnitAllocation = function(obj, formName,obj2) {
+        $scope.DispStatus = false;
+        $scope.DispStatus2 = false;
         $scope.submit = true;
+        $scope.message = "Old Title";
         $scope.unitsSrchList = '';
         if ($scope[formName].$valid) {
             var userProjData = [];
@@ -156,7 +160,7 @@ app.controller("unitsListingController", function($scope, $http, $cookieStore, $
                     "Phase_Id": obj.phase
                 });
             }
-
+           
             angular.element(".loader").show();
             $http({
                 method: "POST",
@@ -169,6 +173,16 @@ app.controller("unitsListingController", function($scope, $http, $cookieStore, $
                 }
             }).success(function(data) {
                 $scope.unitsList = data[0];
+                 if (obj.unitstatus == 1)
+                 {                     
+                     $scope.DispStatus = true;
+                 }
+
+                else if (obj.unitstatus == 3)
+                 {
+                     $scope.DispStatus2 = true;
+                 }             
+                
                 angular.element(".loader").hide();
             }).error(function() {
                 angular.element(".loader").hide();
