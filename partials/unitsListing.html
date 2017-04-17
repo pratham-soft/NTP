@@ -35,9 +35,10 @@
         </div>
         <div>
             <select ng-model="projectDetails.blocks" name="blocks" class="form-control">
+            <!-- commented as API end point not done -- RD 17/04/2017
             <option value="">
                All Blocks
-            </option>
+            </option>-->
             <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
                {{x.Blocks_Name}}
             </option>
