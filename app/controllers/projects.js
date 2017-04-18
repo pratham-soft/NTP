@@ -1,4 +1,7 @@
-app.controller("projectsCtrl", function($scope, $http, $cookieStore, $state) {
+app.controller("projectsCtrl", function($scope, $http, $cookieStore, $state, checkApi) {
+	
+	var errMessage = checkApi.checkErr("-1 | Module fields do not exist for this Module");
+	console.log(errMessage);
 
     ($scope.getProjectsList = function() {
         angular.element(".loader").show();
