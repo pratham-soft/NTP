@@ -189,7 +189,7 @@ app.controller("updateProspectsCtrl", function($scope, $http, $cookieStore, $uib
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.leads[selectedItem];
+                    return selectedItem;
                 }
             }
         });
@@ -203,7 +203,7 @@ app.controller("updateProspectsCtrl", function($scope, $http, $cookieStore, $uib
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.leads[selectedItem];
+                    return selectedItem;
                 }
             }
         });
@@ -392,6 +392,8 @@ app.controller("addProspectCtrl", function($scope, $http, $state, $cookieStore) 
     })();
     $scope.addLead = function(formObj, formName) {
         $scope.submit = true;
+        var date = formObj.dob;
+        var newdate = date.split("/").reverse().join("-");
         if ($scope[formName].$valid) {
             $http({
                 method: "POST",
@@ -411,7 +413,7 @@ app.controller("addProspectCtrl", function($scope, $http, $state, $cookieStore) 
                     "user_state": formObj.state,
                     "user_address": formObj.address,
                     "user_zipcode": formObj.zip,
-                    "user_dob": formObj.dob,
+                    "user_dob": newdate,
                     "user_gender": parseInt(formObj.gender),
                     "user_code": formObj.leadCode,
                     "user_lead_status_id": parseInt(formObj.leadStage),
@@ -446,7 +448,7 @@ app.controller("editProspectCtrl", function($scope, $http, $state, $cookieStore,
         }).success(function(data) {
             var state = data.user_state;
             var city = data.user_city;
-            var dob = $filter('date')(data.user_dob, 'MMM dd, yyyy');
+            var dob = $filter('date')(data.user_dob, 'dd/MM/yyyy');
 
             if (state == 0) {
                 state = "";
@@ -454,7 +456,7 @@ app.controller("editProspectCtrl", function($scope, $http, $state, $cookieStore,
             if (city == 0) {
                 city = "";
             }
-            if (dob == "Jan 01, 0001") {
+            if (dob == "01/01/0001") {
                 dob = "";
             }
             if (data.user_id != 0) {
@@ -484,6 +486,8 @@ app.controller("editProspectCtrl", function($scope, $http, $state, $cookieStore,
 
     $scope.updateLead = function(formObj, formName) {
         $scope.submit = true;
+        var date = formObj.dob;
+        var newdate = date.split("/").reverse().join("-");
         if ($scope[formName].$valid) {
             $http({
                 method: "POST",
@@ -503,13 +507,13 @@ app.controller("editProspectCtrl", function($scope, $http, $state, $cookieStore,
                     "user_state": formObj.state,
                     "user_address": formObj.address,
                     "user_zipcode": formObj.zip,
-                    "user_dob": formObj.dob,
+                    "user_dob": newdate,
                     "user_gender": parseInt(formObj.gender),
                     "user_code": formObj.leadCode,
                     "user_lead_status_id": parseInt(formObj.leadStage)
                 }
             }).success(function(data) {
-                if (data.user_id != 0) {
+                if (data.user_ErrorDesc == "0") {
                     $state.go("/Prospects");
                 } else {
                     alert("Some Error!");

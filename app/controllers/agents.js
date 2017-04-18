@@ -225,7 +225,7 @@ app.controller("agentsCtrl", function($scope, $http, $cookieStore, $state, $uibM
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.agents[selectedItem];
+                    return selectedItem;
                 }
             }
         });

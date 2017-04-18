@@ -26,7 +26,7 @@ app.controller("customerCtrl", function($scope, $http, $cookieStore, $state, $ui
             backdrop: 'static',
             resolve: {
                 item: function() {
-                    return $scope.customers[selectedItem];
+                    return selectedItem;
                 }
             }
         });

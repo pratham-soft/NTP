@@ -41,11 +41,11 @@
                 <td>{{x.user_salesfunnel_name}}</td>
                 <td>Sales Team <span class="glyphicon glyphicon-circle-arrow-right"></span> {{x.user_assingedto_name}}</td>
                 <td>{{x.registration_date | date:'yyyy-MM-dd'}}</td>
-                <td><span class="link" ng-click="leadDetail($index)">View</span></td>
+                <td><span class="link" ng-click="leadDetail(x)">View</span></td>
                 <td>
                     <a ui-sref="/EditProspect({ leadID: {{x.user_id}} })"><span class="link">Edit</span></a>                 
                 </td>
-                <td> <span class="btn btn-primary" ng-click="addSiteVisit($index)">Site Visit</span></td>
+                <td> <span class="btn btn-primary" ng-click="addSiteVisit(x)">Site Visit</span></td>
                 
             </tr>
         </tbody>

@@ -41,7 +41,7 @@
                 <td>{{x.user_email_address}}</td>
 				<td>{{x.user_assingedto}}</td>
 				<td>{{x.Agents_firmname}}</td>
-                <td><span class="link" ng-click="agentDetail($index)">View</span></td>
+                <td><span class="link" ng-click="agentDetail(x)">View</span></td>
                 <td><a ui-sref="/EditAgent({ agentID: {{x.Agents_User_Id}} })"><span class="link">Edit</span></a></td>
 			</tr>
 		</tbody>

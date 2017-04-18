@@ -55,6 +55,23 @@ app.controller("addEmployeeCtrl", function($scope, $http, $state, $cookieStore, 
 
     $scope.addEmployee = function(formObj, formName) {
         $scope.submit = true;
+        var dobuser = formObj.employeeDob;
+        var newdobuser = date.split("/").reverse().join("-");
+        var dojuser = formObj.employeeDoj;
+        var newdoj = date.split("/").reverse().join("-");
+        
+        var dobspouse = formObj.employeeSpouseDob;
+        var newdobspouse = date.split("/").reverse().join("-");
+        
+        var dobchild1 = formObj.employeeChild1Dob;
+        var newdobchild1 = date.split("/").reverse().join("-");
+        var dobchild2 = formObj.employeeChild2Dob;
+        var newdobchild2 = date.split("/").reverse().join("-");
+        var dobchild3 = formObj.employeeChild3Dob;
+        var newdobchild3 = date.split("/").reverse().join("-");
+        var dobchild4 = formObj.employeeChild4Dob;
+        var newdobchild4 = date.split("/").reverse().join("-");
+        
         if ($scope[formName].$valid) {
             angular.element(".loader").show();
             console.log(formObj);
@@ -71,8 +88,8 @@ app.controller("addEmployeeCtrl", function($scope, $http, $state, $cookieStore, 
                     "user_last_name": formObj.employeeLastName,
                     "user_mobile_no": formObj.employeeMobileNumber,
                     "user_address": formObj.employeeAddress,
-                    "user_dob": formObj.employeeDob,
-                    "user_doj": formObj.employeeDoj,
+                    "user_dob": newdobuser,
+                    "user_doj": newdoj,
                     "user_email_address": formObj.employeeEmail,
                     "user_password": formObj.employeePassword,
                     "Emp_pan": formObj.employeePanNumber,
@@ -97,16 +114,16 @@ app.controller("addEmployeeCtrl", function($scope, $http, $state, $cookieStore, 
                     "Emp_Reference2Name": formObj.employeeReference2Name,
                     "Emp_SourceofRecruitment": formObj.employeeSourceOfRecruit,
                     "Emp_spouse_aadhar": formObj.employeeSpouseAadhar,
-                    "Emp_spouse_dob": formObj.employeeSpouseDob,
+                    "Emp_spouse_dob": newdobspouse,
                     "Emp_spouse_nm": formObj.employeeSpouseName,
                     "Emp_spouse_pan": formObj.employeeSpousePan,
-                    "Emp_child1_dob": formObj.employeeChild1Dob,
+                    "Emp_child1_dob": newdobchild1,
                     "Emp_child1_nm": formObj.employeeChild1Name,
-                    "Emp_child2_dob": formObj.employeeChild2Dob,
+                    "Emp_child2_dob": newdobchild2,
                     "Emp_child2_nm": formObj.employeeChild2Name,
-                    "Emp_child3_dob": formObj.employeeChild3Dob,
+                    "Emp_child3_dob": newdobchild3,
                     "Emp_child3_nm": formObj.employeeChild3Name,
-                    "Emp_child4_dob": formObj.employeeChild4Dob,
+                    "Emp_child4_dob": newdobchild4,
                     "Emp_child4_nm": formObj.employeeChild4Name,
                     "Emp_noof_childrn": formObj.employeeChildrenNo,
                     "user_dept_id": formObj.employeeDepartment,
@@ -173,13 +190,13 @@ app.controller("editEmployeeCtrl", function($scope, $http, $cookieStore, $state,
             console.log(data);
 
             var dateArray = [];
-            dateArray.push((data.user_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.user_dob, 'yyyy-MM-dd'));
-            dateArray.push((data.user_doj == '0001-01-01T00:00:00') ? '' : $filter('date')(data.user_doj, 'yyyy-MM-dd'));
-            dateArray.push((data.Emp_spouse_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_spouse_dob, 'yyyy-MM-dd'));
-            dateArray.push((data.Emp_child1_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child1_dob, 'yyyy-MM-dd'));
-            dateArray.push((data.Emp_child2_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child2_dob, 'yyyy-MM-dd'));
-            dateArray.push((data.Emp_child3_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child3_dob, 'yyyy-MM-dd'));
-            dateArray.push((data.Emp_child4_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child4_dob, 'yyyy-MM-dd'));
+            dateArray.push((data.user_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.user_dob, 'dd-MM-yyyy'));
+            dateArray.push((data.user_doj == '0001-01-01T00:00:00') ? '' : $filter('date')(data.user_doj, 'dd-MM-yyyy'));
+            dateArray.push((data.Emp_spouse_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_spouse_dob, 'dd-MM-yyyy'));
+            dateArray.push((data.Emp_child1_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child1_dob, 'dd-MM-yyyy'));
+            dateArray.push((data.Emp_child2_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child2_dob, 'dd-MM-yyyy'));
+            dateArray.push((data.Emp_child3_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child3_dob, 'dd-MM-yyyy'));
+            dateArray.push((data.Emp_child4_dob == '0001-01-01T00:00:00') ? '' : $filter('date')(data.Emp_child4_dob, 'dd-MM-yyyy'));
 
             $scope.addEmployee = {
                 employeeFirstName: data.user_first_name,
