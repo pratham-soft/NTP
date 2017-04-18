@@ -1,7 +1,7 @@
-app.controller("addEmployeeController", function($scope, $http, $state, $cookieStore, $compile, $stateParams, $window) {
+app.controller("addEmployeeCtrl", function($scope, $http, $state, $cookieStore, $compile, $stateParams, $window) {
     $scope.pageTitle = "Add Employee";
     $scope.addEmployeeBtn = true;
-    
+
     ($scope.getRolesList = function() {
         angular.element(".loader").show();
         $http({
@@ -130,14 +130,14 @@ app.controller("addEmployeeController", function($scope, $http, $state, $cookieS
     $scope.appendFields = function(noOfChild) {
         angular.element("#children").html('');
         for (i = 1; i <= noOfChild; i++) {
-            var childDiv = '<div class="field"><label ng-show="addEmployee.employeeChild' + i + 'Name" class="show-hide">Child ' + i + ' Name*</label><input type="text" placeholder="Child ' + i + ' Name" title="Child ' + i + ' Name" class="form-control" name="child' + i + 'Name" ng-model="addEmployee.employeeChild' + i + 'Name" /></div><div class="field has-feedback"><label ng-show="addEmployee.employeeChild' + i + 'Dob" class="show-hide">Child ' + i + ' D.O.B. (DD/MM/YYYY)</label><datepicker date-format="dd/MM/yyyy"><input type="text" placeholder="Child ' + i + ' D.O.B. (DD/MM/YYYY)" title="Child ' + i + ' D.O.B." class="form-control" name="child' + i + 'Dob" ng-model="addEmployee.employeeChild' + i + 'Dob"/><i class="form-control-feedback glyphicon glyphicon-calendar"></i></datepicker></div><br>';
+            var childDiv = '<div class="field"><label ng-show="addEmployee.employeeChild' + i + 'Name" class="show-hide">Child ' + i + ' Name*</label><input type="text" placeholder="Child ' + i + ' Name" title="Child ' + i + ' Name" class="form-control" name="child' + i + 'Name" ng-model="addEmployee.employeeChild' + i + 'Name" /></div><div class="field"><label ng-show="addEmployee.employeeChild' + i + 'Dob" class="show-hide">Child ' + i + ' D.O.B. (YYYY-DD-MM) *</label><input type="text" placeholder="Child ' + i + ' D.O.B. (YYYY-DD-MM)" title="Child ' + i + ' D.O.B." class="form-control" name="child' + i + 'Dob" ng-model="addEmployee.employeeChild' + i + 'Dob"/></div>';
             var childDivComplied = $compile(childDiv)($scope);
             angular.element("#children").append(childDivComplied);
         }
     };
 });
 
-app.controller("editEmployeeController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal) {
+app.controller("editEmployeeCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal) {
     $scope.pageTitle = "Edit Employee";
     $scope.editEmployeeBtn = true;
     $scope.employeeId = $stateParams.employeeId;
@@ -373,115 +373,11 @@ app.controller("editEmployeeController", function($scope, $http, $cookieStore, $
         });
     };
 });
-app.controller("employeeDetailsController", function($scope, $http, $cookieStore, $uibModal, $state) {
+app.controller("employeeDetailsCtrl", function($scope, $http, $cookieStore, $uibModal, $state) {
     $scope.selected=[];
     $scope.roleIdValues=[];
     $scope.roleIdDetails=[];
-    $scope.assigntoNamesDetails=[];
-    $scope.assigntoNameValue=[];
-    $scope.employees=[];
     
-     $scope.sortColumn = "fullName";
-            $scope.reverseSort = false;
-
-            $scope.sortData = function (column) {
-                $scope.reverseSort = ($scope.sortColumn == column) ?
-                    !$scope.reverseSort : false;
-                $scope.sortColumn = column;
-            }
-
-            $scope.getSortClass = function (column) {
-
-                if ($scope.sortColumn == column) {
-                    return $scope.reverseSort
-                      ? 'arrow-down'
-                      : 'arrow-up';
-                }
-
-                return '';
-            }
-    
-    
-        // GET THE FILE INFORMATION.
-        $scope.getFileDetails = function (e) {
-
-            $scope.files = [];
-            $scope.$apply(function () {
-
-                // STORE THE FILE OBJECT IN AN ARRAY.
-                for (var i = 0; i < e.files.length; i++) {
-                    $scope.files.push(e.files[i])
-                }
-
-            });
-        };
-
-        // NOW UPLOAD THE FILES.
-        $scope.uploadFiles = function () {
-
-            //FILL FormData WITH FILE DETAILS.
-            var data = new FormData();
-
-            for (var i in $scope.files) {
-                data.append("uploadedFile", $scope.files[i]);
-            }
-
-            // ADD LISTENERS.
-            var objXhr = new XMLHttpRequest();
-            objXhr.addEventListener("progress", updateProgress, false);
-            objXhr.addEventListener("load", transferComplete, false);
-
-            // SEND FILE DETAILS TO THE API.
-            objXhr.open("POST", "http://120.138.8.150/pratham/Test/fileupload");
-           
-          
-            objXhr.send(data);
-        }
-
-        // UPDATE PROGRESS BAR.
-        function updateProgress(e) {
-            if (e.lengthComputable) {
-                document.getElementById('pro').setAttribute('value', e.loaded);
-                document.getElementById('pro').setAttribute('max', e.total);
-            }
-        }
-
-        // CONFIRMATION.
-        function transferComplete(e) {
-            alert("Files uploaded successfully.");
-        }
-    
-    
-
-    $scope.getAssigntoNamesDetails = function() {
-        angular.element(".loader").show();
-        $http({
-            method: "POST",
-            url: "http://120.138.8.150/pratham/User/EmployeeDtls/ByUserType",
-            ContentType: 'application/json',
-            data: {
-                "user_comp_guid": $cookieStore.get('comp_guid'),
-                "user_type": 2
-            }
-        }).success(function(data) {
-             $scope.assigntoNameValue = data;            
-                for(var i=0; i<$scope.assigntoNameValue.length;i++)
-                    {
-                        $scope.obj={};   
-                        $scope.obj.name = $scope.assigntoNameValue[i].user_first_name +" " + $scope.assigntoNameValue[i].user_middle_name+" "+$scope.assigntoNameValue[i].user_last_name;
-                        $scope.obj.value = $scope.assigntoNameValue[i].user_id;
-                        $scope.assigntoNamesDetails.push($scope.obj)   
-//                        console.log("yo");    
-                    }  
-            //console.log($scope.assigntoNamesDetails);
-            angular.element(".loader").hide();          
-            $scope.employees = data;
-            $scope.getRoleIdDetails();
-        }).error(function() {
-            angular.element(".loader").hide();
-        });
-    };
-    $scope.getAssigntoNamesDetails();
     $scope.getRoleIdDetails = function() {
             angular.element(".loader").show();
             $http({
@@ -504,7 +400,6 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                     }          
 //                console.log($scope.roleIdValues);              
                 angular.element(".loader").hide();
-                $scope.getEmployeesDetails();
                   
             }).error(function() {
                 angular.element(".loader").hide();
@@ -586,7 +481,8 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
         });
     })();
 
-    $scope.getEmployeesDetails = function() {
+    ($scope.getEmployeesDetails = function() {
+        $scope.getRoleIdDetails();
         angular.element(".loader").show();
         $http({
             method: "POST",
@@ -609,27 +505,13 @@ app.controller("employeeDetailsController", function($scope, $http, $cookieStore
                            data[i].user_role_name="Not Assigned";
                         }
                     }
-           
-                    for(var j=0;j<$scope.assigntoNamesDetails.length;j++){
-                    if (data[i].user_assingedto == $scope.assigntoNamesDetails[j].value)
-                        {
-                           data[i].user_assingedto_name=$scope.assigntoNamesDetails[j].name;
-                        }
-                     if (data[i].user_assingedto == "0")
-                        {
-                           data[i].user_assingedto_name="Not Assigned";
-                        }
-                    }
-                    
-                    data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
                 }
-            
             angular.element(".loader").hide();          
             $scope.employees = data;
         }).error(function() {
             angular.element(".loader").hide();
         });
-    };
+    })();
     
 
     

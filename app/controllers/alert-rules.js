@@ -1,4 +1,4 @@
-app.controller("alertRules", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
+app.controller("alertRulesCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
     $scope.pageTitle = "Alert Rules";
     ($scope.getAlertRules = function(){
 		angular.element(".loader").show();
@@ -18,7 +18,7 @@ app.controller("alertRules", function($scope, $http, $cookieStore, $state, $stat
 		})
 	})();
 });
-app.controller("createNewRule", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
+app.controller("createNewRuleCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
     $scope.pageTitle = "Create New Alert Rule";
     $scope.createNewRule = {
         rule_moduleid: ''

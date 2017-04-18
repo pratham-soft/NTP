@@ -1,4 +1,4 @@
-app.controller("generateCostSheet", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
+app.controller("generateCostSheetCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
     $scope.title = "Generate Cost Sheet";
     var blockId = $stateParams.blockId;
     ($scope.getBlockCostSheet = function() {

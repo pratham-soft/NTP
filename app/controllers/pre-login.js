@@ -1,9 +1,9 @@
-app.controller("home", function($scope, $http, $rootScope) {
+app.controller("homeCtrl", function($scope, $http, $rootScope) {
     $scope.title = "Pratham - Pre Login";
     $scope.clientCss = "prathamClient";    
 });
 
-app.controller("firmRegister", function($scope, $http, $state, $cookieStore) {
+app.controller("firmRegisterCtrl", function($scope, $http, $state, $cookieStore) {
     $scope.registerFirm = function(formObj, formName) {
         $scope.submit = true;
         if ($scope[formName].$valid) {
@@ -37,7 +37,7 @@ app.controller("firmRegister", function($scope, $http, $state, $cookieStore) {
     }
 });
 
-app.controller("adminCreation", function($scope, $http, $state, $cookieStore) {
+app.controller("adminCreationCtrl", function($scope, $http, $state, $cookieStore) {
     $scope.createAdminUser = function(formObj, formName) {
         alert($cookieStore.get('comp_guid'));
         $scope.submit = true;
@@ -65,7 +65,7 @@ app.controller("adminCreation", function($scope, $http, $state, $cookieStore) {
     };
 });
 
-app.controller("login", function($scope, $http, $cookieStore, $window) {
+app.controller("loginCtrl", function($scope, $http, $cookieStore, $window) {
     $scope.login = function(formObj, formName) {
         $scope.submit = true;
         if ($scope[formName].$valid) {
@@ -89,7 +89,7 @@ app.controller("login", function($scope, $http, $cookieStore, $window) {
                     if (pageUrl != undefined) {
                         $window.location.href = pageUrl;
                     } else {
-                        $window.location.href = '/home.html#/';
+                        $window.location.href = '/home.html';
                     }
                 }
                 angular.element(".loader").hide();

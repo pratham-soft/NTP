@@ -1,4 +1,4 @@
-app.controller("paymentScheduleController", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $rootScope, myService) {
+app.controller("paymentScheduleCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $rootScope, myService) {
     ($scope.projectListFun = function() {
         angular.element(".loader").show();
         myService.getProjectList($cookieStore.get('comp_guid')).then(function(response) {
@@ -74,7 +74,7 @@ app.controller("paymentScheduleController", function($scope, $http, $state, $coo
     };
 });
 
-app.controller("paymentScheduleChangeController", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $uibModalInstance, $rootScope, item) {
+app.controller("paymentScheduleChangeCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $uibModalInstance, $rootScope, item) {
 
     ($scope.getPaymentScheduleDetail = function() {
         $scope.blockStage = {

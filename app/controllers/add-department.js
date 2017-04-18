@@ -1,4 +1,4 @@
-app.controller("addDepartmentController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
+app.controller("addDepartmentCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile) {
     ($scope.getParentDepartmentDetails = function() {
         angular.element(".loader").show();
         $http({

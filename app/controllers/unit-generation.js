@@ -1,4 +1,4 @@
-app.controller("unitGeneration", function($scope, $http, $state, $cookieStore, $stateParams, $compile, myService) {
+app.controller("unitGenerationCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, myService) {
     $scope.untDetails = [];
     $scope.projectId = $stateParams.projId;
     $scope.phaseId = $stateParams.phaseId;

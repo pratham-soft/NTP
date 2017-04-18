@@ -1,4 +1,4 @@
-app.controller("costSheetTemplates", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal) {
+app.controller("costSheetTemplatesCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal) {
     $scope.title = "Cost Sheet Templates";
     ($scope.getCostSheetTemplates = function() {
         angular.element(".loader").show();
@@ -36,7 +36,7 @@ app.controller("costSheetTemplates", function($scope, $http, $state, $cookieStor
     };
 });
 
-app.controller("costSheetDetail", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModalInstance, item) {
+app.controller("costSheetDetailCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModalInstance, item) {
     $scope.costSheetDetail = item;
     $scope.formulaType = ['Formula', 'Flat'];
     $scope.ok = function() {
@@ -44,7 +44,7 @@ app.controller("costSheetDetail", function($scope, $http, $state, $cookieStore, 
     };
 });
 
-app.controller("costSheetTemplate", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal) {
+app.controller("costSheetTemplateCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal) {
     $scope.title = "Add Cost Sheet Template";
     /*$scope.costSheetTemplate = {
         untctcm_Ascending: '',
@@ -178,7 +178,7 @@ app.controller("costSheetTemplate", function($scope, $http, $state, $cookieStore
         }
     };
 });
-app.controller("costComponentFormula", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $uibModalInstance, item) {
+app.controller("costComponentFormulaCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, $uibModal, $uibModalInstance, item) {
     $scope.formula = {
         abbreviation: '',
         operator: ''

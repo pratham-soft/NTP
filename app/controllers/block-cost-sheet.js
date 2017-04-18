@@ -1,4 +1,4 @@
-app.controller("blockCostSheet", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
+app.controller("blockCostSheetCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
     $scope.title = "Block Cost Sheet";
 
     myService.getProjectList($cookieStore.get('comp_guid')).then(function(response) {
@@ -73,7 +73,7 @@ app.controller("blockCostSheet", function($scope, $http, $cookieStore, $state, $
     }
 });
 
-app.controller("editBlockCostSheet", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
+app.controller("editBlockCostSheetCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
     $scope.title = "Edit Block Cost Sheet";
 
     $scope.checkBlockUnits = function(blockId) {

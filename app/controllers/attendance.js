@@ -1,4 +1,4 @@
-app.controller("attendance", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal) {
+app.controller("attendanceCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal) {
     $scope.title = "Attendance";
     $scope.attendanceCodes = ['', 'P', 'A', 'L', 'H'];
     var d = new Date();
@@ -122,7 +122,7 @@ app.controller("attendance", function($scope, $http, $cookieStore, $state, $stat
         });
     }
 });
-app.controller("markAttendance", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $uibModalInstance, $location, item) {
+app.controller("markAttendanceCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $uibModalInstance, $location, item) {
     $scope.empAttn = item;
     $scope.saveAttn = function(formName, formObj) {
         $scope.submit = true;

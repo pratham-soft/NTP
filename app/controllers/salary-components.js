@@ -1,4 +1,4 @@
-app.controller("ctcDetailController", function($scope, $http, $cookieStore, $uibModalInstance, $stateParams, $state, item) {
+app.controller("ctcDetailCtrl", function($scope, $http, $cookieStore, $uibModalInstance, $stateParams, $state, item) {
     $scope.empObject = item;
 
     ($scope.getSalaryComponentDetails = function() {
@@ -56,7 +56,7 @@ app.controller("ctcDetailController", function($scope, $http, $cookieStore, $uib
     };
 });
 
-app.controller("salaryComponentDetailsController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $rootScope) {
+app.controller("salaryComponentDetailsCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $rootScope) {
 
     ($scope.getSalaryComponentDetails = function() {
         angular.element(".loader").show();
@@ -104,7 +104,7 @@ app.controller("salaryComponentDetailsController", function($scope, $http, $cook
     };
 });
 
-app.controller("addSalaryComponentController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
+app.controller("addSalaryComponentCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
     $scope.pageTitle = "Add Salary Component";
     $scope.addSalaryComponentBtn = true;
 
@@ -161,7 +161,7 @@ app.controller("addSalaryComponentController", function($scope, $http, $cookieSt
     };
 });
 
-app.controller("editSalaryComponentController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
+app.controller("editSalaryComponentCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
     $scope.pageTitle = "Edit Salary Component";
     $scope.editSalaryComponentBtn = true;
 

@@ -35,70 +35,33 @@
         </div>
         <div>
             <select ng-model="projectDetails.blocks" name="blocks" class="form-control">
-            <!-- commented as API end point not done -- RD 17/04/2017
             <option value="">
                All Blocks
-            </option>-->
-             <option value="">
-               Block
-            </option>    
+            </option>
             <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
                {{x.Blocks_Name}}
             </option>
          </select>
         </div>
-        <!-- RD 14/04/2017-->
-        
-        <div>
-            <select ng-model="projectDetails.unitstatus" name="unitstatus" class="form-control" >
-            <option value="">
-               All Unit Status
-            </option>
-             <option value="1">
-                     Vacant
-             </option>
-             <option value="2">
-                     Interested
-             </option>
-             <option value="3">
-                     Management Quota
-             </option>
-            <option value="4" >
-                     Booked by Paying Advance
-             </option>
-            <option value="5">
-                     Booked without Paying Advance
-             </option>
-         </select>
-        </div>
         <div class="text-right">
-            <button type="button" class="btn btn-primary" ng-model="projectDetails.btngetunits" ng-click="getUnitAllocation(projectDetails,'unitAllocationForm','projectDetails.btngetblks')">Get Units</button>  
-             <button type="button" class="btn btn-primary" name="projectDetails.btngetblks" ng-click="unitStatusBtnClick(projectDetails,'unitAllocationForm')" ng-show=DispStatus>Block</button>
-            <button type="button" class="btn btn-primary" name="projectDetails.btngetrels" ng-click="unitStatusBtnClick(projectDetails,'unitAllocationForm')" ng-show=DispStatus2>Release</button>
+            <button type="button" class="btn btn-primary" ng-click="getUnitAllocation(projectDetails,'unitAllocationForm')">Get Units</button>
         </div>
-       
     </form>
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop20">
-    <input type="text" class="form-control marginBottom5 search" placeholder="Search Units" ng-model="unitsSrchList"/>
     <table class="table borderDef">
         <thead>
-            <tr>     
-                <th>#</th>
-                <th> <input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()">Select </th>
+            <tr>                
                 <th>Unit Number</th>
                 <th class="text-center">BHK</th>
-                <th>Super Built-up Area</th>
-                <th class="text-center">Floor</th>
+                <th>Super Area</th>
+                <th class="text-center">Floor Number</th>
                 <th class="text-center">Cost Sheet</th>
                 <th class="text-center">Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="x in unitsList | filter:unitsSrchList track by $index">
-                <td>{{$index + 1}}</td>
-                <td><input type="checkbox" ng-click="toggleSelection(x.UnitDtls_Id)" name="" ng-model="selected"
-                           ng-checked="exist(x.UnitDtls_Id)" ></td>
+            <tr ng-repeat="x in unitsList">
                 <td>Flat No.{{x.UnitDtls_No}}</td>
                 <td class="text-center">{{x.UnitDtls_Name}}</td>
                 <td>{{x.UnitDtls_BuliltupArea}} Sq.Ft.</td>

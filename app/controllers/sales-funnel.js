@@ -1,4 +1,4 @@
-app.controller("salesFunnelController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $rootScope) {
+app.controller("salesFunnelCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, $rootScope) {
 
     ($scope.getSalesFunnelDetails = function() {
         angular.element(".loader").show();
@@ -46,7 +46,7 @@ app.controller("salesFunnelController", function($scope, $http, $cookieStore, $s
     };
 });
 
-app.controller("addSalesFunnelController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
+app.controller("addSalesFunnelCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
     $scope.pageTitle = "Add Sales Funnel";
     $scope.addSalesFunnelBtn = true;
 
@@ -95,7 +95,7 @@ app.controller("addSalesFunnelController", function($scope, $http, $cookieStore,
     };
 });
 
-app.controller("editSalesFunnelController", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
+app.controller("editSalesFunnelCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModalInstance, $rootScope, item) {
     $scope.pageTitle = "Edit Sales Funnel";
     $scope.editSalesFunnelBtn = true;
 

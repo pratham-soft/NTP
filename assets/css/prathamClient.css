@@ -504,9 +504,6 @@ body {
   line-height: 1.428571429;
   color: #333333;
 }
-th2 {
-    cursor: pointer;
-}
 
 #chart-container {
   position: relative;
@@ -808,25 +805,4 @@ td.inputType{
     color: #EEE;
     box-shadow: 0 0 10px #CCC;
     font-weight: bold;
-}
-
-
-/*This class displays the UP arrow*/
-.arrow-up {
-     width: 0;
-     height: 0;
-     border-left: 5px solid transparent;
-     border-right: 5px solid transparent;
-     border-bottom: 10px solid black;
-     display:inline-block;
-}
-
-/*This class displays the DOWN arrow*/
-.arrow-down {
-     width: 0;
-     height: 0;
-     border-left: 5px solid transparent;
-     border-right: 5px solid transparent;
-     border-top: 10px solid black;
-     display:inline-block;
 }

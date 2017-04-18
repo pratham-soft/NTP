@@ -1,3 +1,3 @@
-app.controller("dashboard", function($scope, $http, $cookieStore) {
+app.controller("dashboardCtrl", function($scope, $http, $cookieStore) {
     $scope.title = "Pratham :: Home";
 });

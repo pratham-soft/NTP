@@ -1,4 +1,4 @@
-app.controller("addAgentController", function($scope, $http, $cookieStore, $state) {
+app.controller("addAgentCtrl", function($scope, $http, $cookieStore, $state) {
     $scope.pageTitle = "Add Agent";
     $scope.addAgentBtn = true;
 
@@ -78,65 +78,11 @@ app.controller("addAgentController", function($scope, $http, $cookieStore, $stat
         }
     };
 });
-app.controller("agentsController", function($scope, $http, $cookieStore, $state, $uibModal) {
+app.controller("agentsCtrl", function($scope, $http, $cookieStore, $state, $uibModal) {
     $scope.searchAgents = ''; // set the default search/filter term
     $scope.selected=[];
     $scope.roleIdValues=[];
     $scope.roleIdDetails=[];
-    $scope.assigntoNamesDetails=[];
-    $scope.assigntoNameValue=[];
-    $scope.agents=[];
-    
-    $scope.sortColumn = "fullName";
-            $scope.reverseSort = false;
-
-            $scope.sortData = function (column) {
-                $scope.reverseSort = ($scope.sortColumn == column) ?
-                    !$scope.reverseSort : false;
-                $scope.sortColumn = column;
-            }
-
-            $scope.getSortClass = function (column) {
-
-                if ($scope.sortColumn == column) {
-                    return $scope.reverseSort
-                      ? 'arrow-down'
-                      : 'arrow-up';
-                }
-
-                return '';
-            }
-    
-    
-    $scope.getAssigntoNamesDetails = function() {
-        angular.element(".loader").show();
-        $http({
-            method: "POST",
-            url: "http://120.138.8.150/pratham/User/EmployeeDtls/ByUserType",
-            ContentType: 'application/json',
-            data: {
-                "user_comp_guid": $cookieStore.get('comp_guid'),
-                "user_type": 2
-            }
-        }).success(function(data) {
-             $scope.assigntoNameValue = data;            
-                for(var i=0; i<$scope.assigntoNameValue.length;i++)
-                    {
-                        $scope.obj={};   
-                        $scope.obj.name = $scope.assigntoNameValue[i].user_first_name +" " + $scope.assigntoNameValue[i].user_middle_name+" "+$scope.assigntoNameValue[i].user_last_name;
-                        $scope.obj.value = $scope.assigntoNameValue[i].user_id;
-                        $scope.assigntoNamesDetails.push($scope.obj)   
-//                        console.log("yo");    
-                    }  
-            //console.log($scope.assigntoNamesDetails);
-            angular.element(".loader").hide();          
-            $scope.employees = data;
-            $scope.getRoleIdDetails();
-        }).error(function() {
-            angular.element(".loader").hide();
-        });
-    };
-    $scope.getAssigntoNamesDetails();
     
     $scope.getRoleIdDetails = function() {
             angular.element(".loader").show();
@@ -158,9 +104,9 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
 //                        console.log("yo");
                         
                     }          
-//                console.log($scope.roleIdValues); 
-                $scope.getAgents(); 
-                angular.element(".loader").hide(); 
+//                console.log($scope.roleIdValues);              
+                angular.element(".loader").hide();
+                  
             }).error(function() {
                 angular.element(".loader").hide();
                 console.log("something went wrong.");
@@ -238,7 +184,8 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
         });
     })();
     
-    $scope.getAgents = function() {
+    ($scope.getAgents = function() {
+        $scope.getRoleIdDetails();
         angular.element(".loader").show();
         $http({
             method: "POST",
@@ -261,18 +208,6 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
                            data[i].user_role_name="Not Assigned";
                         }
                     }
-                   
-                    for(var j=0;j<$scope.assigntoNamesDetails.length;j++){
-                    if (data[i].user_assingedto == $scope.assigntoNamesDetails[j].value)
-                        {
-                           data[i].user_assingedto_name=$scope.assigntoNamesDetails[j].name;
-                        }
-                     if (data[i].user_assingedto == "0")
-                        {
-                           data[i].user_assingedto_name="Not Assigned";
-                        }
-                    }
-                data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
                 }
             console.log(data);
             angular.element(".loader").hide();
@@ -280,7 +215,7 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
         }).error(function() {
             angular.element(".loader").hide();
         });
-    };
+    })();
     
     $scope.agentDetail = function(selectedItem) {
         var modalInstance = $uibModal.open({
@@ -296,13 +231,13 @@ app.controller("agentsController", function($scope, $http, $cookieStore, $state,
         });
     };
 });
-app.controller("agentsDetailController", function($scope, $http, $cookieStore, $uibModalInstance, item) {
+app.controller("agentsDetailCtrl", function($scope, $http, $cookieStore, $uibModalInstance, item) {
     $scope.agentDetail = item;
     $scope.ok = function() {
         $uibModalInstance.close();
     };
 });
-app.controller("editAgentController", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
+app.controller("editAgentCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
     $scope.pageTitle = "Edit Agent";
     $scope.editAgentBtn = true;
 
@@ -428,4 +363,169 @@ app.controller("editAgentController", function($scope, $http, $state, $cookieSto
             alert("Not valid!");
         }
     };
+});
+
+app.controller("updateRoleIdAndAssignedToCtrl", function($scope, $uibModalInstance, $state, item,$http, $cookieStore,$rootScope,$window) {
+    $scope.firstDropValues=[];
+    $scope.repotingDetails =[];
+    $scope.roleIdDetails =[];
+    $scope.updateTypeValues=[{name:"Role", value:1},{name:"Reporting to", value:2}];
+    
+
+        $scope.onChangeSelectOption=function(val){
+        $scope.checkOneValue=val.value};
+    
+        $scope.selectUpdate=function(){
+//      console.log(item);
+//      console.log($scope.myModelFirst);
+      
+       if($scope.myModelFirst=="1"){   
+         $scope.firstDropValues.length=0;
+         $scope.getRoleIdDetails();
+        // console.log("something happened in salesFunnel.");
+       }
+      
+       if($scope.myModelFirst=="2"){
+         $scope.firstDropValues.length=0;
+         $scope.getReportingToDetails();
+        // console.log("something happened in assigned to.");
+       }
+       
+       
+   };
+   
+
+        $scope.getRoleIdDetails = function() {
+            angular.element(".loader").show();
+            $http({
+                method: "POST",
+                url: "http://120.138.8.150/pratham/Comp/RoleGet",
+                ContentType: 'application/json',
+                data: {
+                    "role_compguid": $cookieStore.get('comp_guid')
+                }
+            }).success(function(data) {
+                $scope.roleIdDetails = data;            
+                for(var i=0; i<$scope.roleIdDetails.length;i++)
+                    {
+                        $scope.obj={};   
+                        $scope.obj.name = $scope.roleIdDetails[i].role_name;
+                        $scope.obj.value = $scope.roleIdDetails[i].role_id;
+                        $scope.firstDropValues.push($scope.obj)   
+//                        console.log("yo");
+                        
+                    }               
+                //console.log("myitem:"+item);
+                //console.log($scope.firstDropValues);              
+                angular.element(".loader").hide();
+                  
+            }).error(function() {
+                angular.element(".loader").hide();
+                console.log("something went wrong.");
+            }); 
+            
+        };
+        
+
+        $scope.getReportingToDetails = function() {
+            angular.element(".loader").show();
+            $http({
+                method: "POST",
+            url: "http://120.138.8.150/pratham/User/EmployeeDtls/ByUserType",
+            ContentType: 'application/json',
+            data: {
+                "user_comp_guid": $cookieStore.get('comp_guid'),
+                "user_type": 2
+                }
+            }).success(function(data) {
+                $scope.repotingDetails = data;            
+                for(var i=0; i<$scope.repotingDetails.length;i++)
+                    {
+                        $scope.obj={};   
+                        $scope.obj.name = $scope.repotingDetails[i].user_first_name +" " + $scope.repotingDetails[i].user_last_name;
+                        $scope.obj.value = $scope.repotingDetails[i].user_id;
+                        $scope.firstDropValues.push($scope.obj)   
+//                        console.log("yo");
+                        
+                    }          
+                //console.log($scope.firstDropValues);               
+                angular.element(".loader").hide();
+                  
+            }).error(function() {
+                angular.element(".loader").hide();
+                console.log("something went wrong.");
+            }); 
+        };
+    
+    
+    $scope.updateAssignedTo = function() {
+        angular.element(".loader").show();
+        $http({
+            method: "POST",
+            url: "http://120.138.8.150/pratham/User/UserUpdt/AssignedTo",
+            ContentType: 'application/json',
+            data: {
+                "user_ids":item,
+                "user_compguid":$cookieStore.get('comp_guid'),
+                "user_updtfields":$scope.myModel,
+            }
+        }).success(function(data) {
+//            console.log("start");
+//            console.log(item);
+//            console.log($scope.myModel);
+//            console.log("finish");
+            alert("Assignment Updation Sucessful!");
+            angular.element(".loader").hide();
+            $scope.ok();
+           // $scope.lead_source_list= data;
+        }).error(function() {
+            angular.element(".loader").hide();
+        });
+    };
+    
+    
+    $scope.updateRoleFunction= function() {
+        angular.element(".loader").show();
+        $http({
+            method: "POST",
+            url: "http://120.138.8.150/pratham/User/UserUpdt/RoleId",
+            ContentType: 'application/json',
+            data: {
+                "user_ids":item,
+                "user_compguid":$cookieStore.get('comp_guid'),
+                "user_updtfields":$scope.myModel,
+            }
+        }).success(function(data) {
+            
+            alert("Role Updation Sucessful!");
+            angular.element(".loader").hide();
+            $scope.ok();
+            
+        }).error(function() {
+            angular.element(".loader").hide();
+        });
+    };
+    
+    $scope.action=function(){
+       
+        if($scope.myModelFirst=="1"){
+            console.log(item);
+            console.log("kuch hua 1");
+            $scope.updateRoleFunction();
+        }
+        
+        if($scope.myModelFirst=="2"){
+            console.log(item);
+            console.log("kuch hua 2");
+            $scope.updateAssignedTo();
+        }
+    };
+
+    
+    $scope.ok = function() {
+    $uibModalInstance.close();
+    $window.location.reload();
+    };
+
+
 });

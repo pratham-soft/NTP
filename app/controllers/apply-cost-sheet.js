@@ -1,4 +1,4 @@
-app.controller("applyCostSheet", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService) {
+app.controller("applyCostSheetCtrl", function($scope, $http, $cookieStore, $state, $stateParams, $filter, $compile, $uibModal, myService){
     $scope.title = "Apply Cost Sheet";
     $scope.projectId = $stateParams.projectId;
     $scope.phaseId = $stateParams.phaseId;

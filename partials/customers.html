@@ -16,17 +16,17 @@
 		<thead>
 			<tr>
 				<th>#</th>
-                <th ng-click="sortData('fullName')"><th2>Name </th2><div ng-class="getSortClass('fullName')"></div></th>
+                <th>Name</th>
                 <th>Mobile</th>
-                <th ng-click="sortData('user_email_address')"><th2>Email Id </th2><div ng-class="getSortClass('user_email_address')"></div></th>
-				<th >Status</th>
+                <th>Email Id</th>
+				<th>Status</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in customers | orderBy:sortColumn:reverseSort | filter:searchCustomers">
+			<tr ng-repeat="x in customers | filter:searchCustomers track by $index">
 				<td>{{$index + 1}}</td>
-				<td>{{x.fullName}} </td>
+				<td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
                  <td>{{x.user_mobile_no}}</td>
                 <td>{{x.user_email_address}}</td>
 				<td><span class="link" ng-click="customerDetail($index)">View</span></td>

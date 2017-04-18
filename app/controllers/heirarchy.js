@@ -1,4 +1,4 @@
-app.controller("heirarchyController", function($scope, $http, $cookieStore, $state) {
+app.controller("heirarchyCtrl", function($scope, $http, $cookieStore, $state) {
 
     ($scope.heirarchyDetails = function() {
         angular.element(".loader").show();

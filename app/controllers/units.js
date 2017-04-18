@@ -1,12 +1,13 @@
-app.controller("units", function($scope, $http, $state, $cookieStore, $stateParams, $compile, myService) {
+app.controller("unitsCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $compile, myService) {
     $scope.title = "Units";
 
     $scope.projectListFun = function() {
         angular.element(".loader").show();
-        myService.getProjectList($cookieStore.get('comp_guid')).then(function(response) {
+        $scope.projectList = myService.getProjectList($cookieStore.get('comp_guid'));
+        /*.then(function(response) {
             $scope.projectList = response.data;
             angular.element(".loader").hide();
-        });
+        });*/
     };
 
     $scope.phaseListFun = function(projectName) {

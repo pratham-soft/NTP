@@ -5,17 +5,17 @@ $stateProvider
     .state('/RegisterFirm', {
 		url: '/RegisterFirm',
 		templateUrl: 'partials/firmRegister.html',
-		controller: 'firmRegister'
+		controller: 'firmRegisterCtrl'
 	})
     .state('/AdminCreation', {
 		url: '/AdminCreation',
 		templateUrl: 'partials/adminCreation.html',
-		controller: 'adminCreation'
+		controller: 'adminCreationCtrl'
 	})
     .state('/Login', {
 		url: '/Login',
 		templateUrl: 'partials/login.html',
-		controller: 'login'
+		controller: 'loginCtrl'
 	})
 });
 app.config(function($httpProvider){

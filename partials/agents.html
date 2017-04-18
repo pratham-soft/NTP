@@ -20,26 +20,26 @@
 			<tr>
 				<th>#</th>
                 <th> <input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()">Select </th>
-				<th ng-click="sortData('fullName')"><th2>Name </th2><div ng-class="getSortClass('fullName')"></div></th>
+				<th>Name</th>
                 <th>Mobile</th>
-                <th ng-click="sortData('user_role_name')"><th2>Role </th2><div ng-class="getSortClass('user_role_name')"></div></th>
-                <th ng-click="sortData('user_email_address')"><th2>Email Id </th2><div ng-class="getSortClass('user_email_address')"></div></th>
-				<th ng-click="sortData('user_assingedto_name')"><th2>Reporting To </th2><div ng-class="getSortClass('user_assingedto_name')"></div></th>
-                <th ng-click="sortData('Agents_firmname')"><th2>Firm Name </th2><div ng-class="getSortClass('Agents_firmname')"></div></th>
+                <th>Role </th>
+                <th>Email Id</th>
+				<th>Reporting To</th>
+                <th>Firm Name</th>
 				<th>Status</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in agents | orderBy:sortColumn:reverseSort | filter:searchAgents">
+			<tr ng-repeat="x in agents | filter:searchAgents track by $index">
 				<td>{{$index + 1}}</td>
                 <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
                            ng-checked="exist(x.user_id)" ></td>
-				<td>{{x.fullName}}</td>
+				<td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
                  <td>{{x.user_mobile_no}}</td>
                 <td>{{x.user_role_name}}</td>
                 <td>{{x.user_email_address}}</td>
-				<td>{{x.user_assingedto_name}}</td>
+				<td>{{x.user_assingedto}}</td>
 				<td>{{x.Agents_firmname}}</td>
                 <td><span class="link" ng-click="agentDetail($index)">View</span></td>
                 <td><a ui-sref="/EditAgent({ agentID: {{x.Agents_User_Id}} })"><span class="link">Edit</span></a></td>

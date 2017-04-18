@@ -1,3 +1,33 @@
+app.factory('httpSvc', function ($http){
+    var Models = {
+        'leads': {}
+    };
+    
+    Models.leads.getAll = function(obj){
+        var request = {
+                method: 'POST',
+                url: 'http://120.138.8.150/pratham/User/UserDtls/ByUserType',
+                ContentType: 'application/json',
+                data: obj
+            };
+        return $http(request);
+    }
+	
+	Models.leads.leadToProspect = function(obj){
+        var request = {
+                method: 'POST',
+                url: 'http://120.138.8.150/pratham/User/UserUpdt/leadToProspect',
+                ContentType: 'application/json',
+                data: obj
+            };
+        return $http(request);
+    }
+	
+    return Models;
+});
+
+
+
 app.service('myService', function($http) {
     this.sampleFun = function(compId) {
         return compId;

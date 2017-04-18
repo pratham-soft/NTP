@@ -1,4 +1,4 @@
-app.controller("AccessRights", function($scope, $http, $state, $cookieStore) {
+app.controller("accessRightsCtrl", function($scope, $http, $state, $cookieStore) {
     $scope.pageTitle = "Access Rights";
     $scope.currentRoleId = 0;
 

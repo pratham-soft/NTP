@@ -1,4 +1,4 @@
-app.controller("projects", function($scope, $http, $cookieStore, $state) {
+app.controller("projectsCtrl", function($scope, $http, $cookieStore, $state) {
 
     ($scope.getProjectsList = function() {
         angular.element(".loader").show();
@@ -57,7 +57,7 @@ app.controller("projects", function($scope, $http, $cookieStore, $state) {
     }
 });
 
-app.controller("addProject", function($scope, $http, $cookieStore, $state) {
+app.controller("addProjectCtrl", function($scope, $http, $cookieStore, $state) {
     $scope.pageTitle = "Add Project";
     $scope.addProjectBtn = true;
     $scope.saveProject = function(formObj, formName) {
@@ -130,7 +130,7 @@ app.controller("addProject", function($scope, $http, $cookieStore, $state) {
     }
 });
 
-app.controller("editProject", function($scope, $http, $cookieStore, $state, $stateParams) {
+app.controller("editProjectCtrl", function($scope, $http, $cookieStore, $state, $stateParams) {
     $scope.pageTitle = "Edit Project";
     $scope.editProjectBtn = true;
 

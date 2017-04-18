@@ -1,109 +1,26 @@
-app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state, $window) {
+app.controller("leadsCtrl", function($scope, $rootScope, $http, $cookieStore, $uibModal, $state, $window, httpSvc) {
     $scope.searchLead = ''; // set the default search/filter term
     $scope.selected = []; //stores checked items only
-    $scope.leads=[];
-    
-    $scope.sortColumn = "fullName";
-            $scope.reverseSort = false;
 
-            $scope.sortData = function (column) {
-                $scope.reverseSort = ($scope.sortColumn == column) ?
-                    !$scope.reverseSort : false;
-                $scope.sortColumn = column;
-            }
-
-            $scope.getSortClass = function (column) {
-
-                if ($scope.sortColumn == column) {
-                    return $scope.reverseSort
-                      ? 'arrow-down'
-                      : 'arrow-up';
-                }
-
-                return '';
-            }
-            
-            // GET THE FILE INFORMATION.
-        $scope.getFileDetails = function (e) {
-
-            $scope.files = [];
-            $scope.$apply(function () {
-
-                // STORE THE FILE OBJECT IN AN ARRAY.
-                for (var i = 0; i < e.files.length; i++) {
-                    $scope.files.push(e.files[i])
-                }
-
-            });
-        };
-
-        // NOW UPLOAD THE FILES.
-        $scope.uploadFiles = function () {
-
-            //FILL FormData WITH FILE DETAILS.
-            var data = new FormData();
-
-            for (var i in $scope.files) {
-                data.append("uploadedFile", $scope.files[i]);
-            }
-
-            // ADD LISTENERS.
-            var objXhr = new XMLHttpRequest();
-            objXhr.addEventListener("progress", updateProgress, false);
-            objXhr.addEventListener("load", transferComplete, false);
-
-            // SEND FILE DETAILS TO THE API.
-            objXhr.open("POST", "http://120.138.8.150/pratham/Test/fileupload");
-           
-          
-            objXhr.send(data);
-        }
-
-        // UPDATE PROGRESS BAR.
-        function updateProgress(e) {
-            if (e.lengthComputable) {
-                document.getElementById('pro').setAttribute('value', e.loaded);
-                document.getElementById('pro').setAttribute('max', e.total);
-            }
-        }
-
-        // CONFIRMATION.
-        function transferComplete(e) {
-            alert("Files uploaded successfully.");
-        }
-    
-
-    ($scope.getLeads = function() {
-        angular.element(".loader").show();
-        $http({
-            method: "POST",
-            url: "http://120.138.8.150/pratham/User/UserDtls/ByUserType",
-            ContentType: 'application/json',
-            data: {
-                "user_comp_guid": $cookieStore.get('comp_guid'),
-                "user_type": 3
-            }
-        }).success(function(data) {
-            //console.log(data);
-            if (data[0].user_ErrorDesc != '-1 | User record does not exist') {
-                angular.element(".loader").hide();
-                for(var i=0;i<data.length;i++){
-                    data[i].fullName=data[i].user_first_name+" "+data[i].user_middle_name+" "+data[i].user_last_name;
-                }
-                $scope.leads = data;
-            } else {
-                angular.element(".loader").hide();
-            }
-            //console.log("data:"+JSON.stringify(data));
-        }).error(function() {
+    var leadsPostObj = {
+        "user_comp_guid": $cookieStore.get('comp_guid'),
+        "user_type": 3
+    };
+	angular.element(".loader").show();
+    httpSvc.leads.getAll(leadsPostObj).success(function(data) {
+        if (data[0].user_ErrorDesc != '-1 | User record does not exist') {
             angular.element(".loader").hide();
-        });
-    })();
+            $scope.leads = data;
+        } else {
+            angular.element(".loader").hide();
+        }
+    }).error(function(data) {
+		angular.element(".loader").hide();
+	});
 
     function printMe(val) {
         console.log("" + val);
     }
-
 
     $scope.exist = function(item) {
         return $scope.selected.indexOf(item) > -1;
@@ -112,10 +29,8 @@ app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state,
         var idx = $scope.selected.indexOf(item);
         if (idx > -1) {
             $scope.selected.splice(idx, 1);
-            //              console.log($scope.selected);
         } else {
             $scope.selected.push(item);
-            //              console.log($scope.selected);
         }
 
     }
@@ -140,37 +55,32 @@ app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state,
     $scope.leadToProspectBtnClick = function() {
         var str = "" + $scope.selected;
         if (str != "") {
-            angular.element(".loader").show();
-            $http({
-                method: "POST",
-                url: "http://120.138.8.150/pratham/User/UserUpdt/leadToProspect",
-                ContentType: 'application/json',
-                data: {
+			var obj = {
                     "user_ids": str,
                     "user_compguid": $cookieStore.get('comp_guid')
-                }
-            }).success(function(data) {
-                console.log(data);
+            };
+            angular.element(".loader").show();
+            httpSvc.leads.leadToProspect(obj).success(function(data) {
                 if (data.ErrorDesc == "0 | Update Success") {
                     $scope.selected = [];
                     angular.element(".loader").hide();
                     $window.location.reload();
                 } else {
-                    alert("Some Error Occurred While Updating");
                     angular.element(".loader").hide();
                 }
             }).error(function() {
                 angular.element(".loader").hide();
             });
         } else {
-            alert("Please Select the User")
+            $rootScope.appMsg = "Please select at least one lead.";
+ 			$rootScope.showAppMsg = true;
         }
-    } //leadToProspectBtnClick end
+    }
 
     $scope.leadDetail = function(selectedItem) {
         var modalInstance = $uibModal.open({
             templateUrl: 'leadDetail.html',
-            controller: 'leadDetail',
+            controller: 'leadDetailCtrl',
             size: 'lg',
             backdrop: 'static',
             resolve: {
@@ -186,7 +96,7 @@ app.controller("leads", function($scope, $http, $cookieStore, $uibModal, $state,
     };
 });
 
-app.controller("leadDetail", function($scope, $uibModalInstance, $state, item) {
+app.controller("leadDetailCtrl", function($scope, $uibModalInstance, $state, item) {
     $scope.leadType = ['hot', 'warm', 'cold'];
     $scope.states = ["Delhi"];
     $scope.cities = ["New Delhi"];
@@ -232,7 +142,7 @@ app.controller("leadDetail", function($scope, $uibModalInstance, $state, item) {
     }
 });
 
-app.controller("addLead", function($scope, $http, $state, $cookieStore) {
+app.controller("addLeadCtrl", function($scope, $http, $state, $cookieStore) {
     $scope.pageTitle = "Add Lead";
     $scope.addLeadBtn = true;
     ($scope.getLeadSource = function() {
@@ -292,7 +202,7 @@ app.controller("addLead", function($scope, $http, $state, $cookieStore) {
     };
 });
 
-app.controller("editLead", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
+app.controller("editLeadCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
     $scope.pageTitle = "Edit Lead";
     $scope.editLeadBtn = true;
     ($scope.getLeadSource = function() {
@@ -403,7 +313,7 @@ app.controller("editLead", function($scope, $http, $state, $cookieStore, $stateP
     };
 });
 
-app.controller("projectDetails", function($scope, $http, $state, $cookieStore, $compile, $stateParams, $window, myService) {
+app.controller("projectDetailsCtrl", function($scope, $http, $state, $cookieStore, $compile, $stateParams, $window, myService) {
     $scope.leadId = $stateParams.leadID;
     if ($scope.leadId == undefined) {
         $state.go('/AddLead');

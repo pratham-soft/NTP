@@ -4,250 +4,249 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('/', {
             url: '/',
             templateUrl: 'partials/dashboard.html',
-            controller: 'dashboard'
+            controller: 'dashboardCtrl'
         })
         .state('/Leads', {
             url: '/Leads',
             templateUrl: 'partials/leads.html',
-            controller: 'leads'
+            controller: 'leadsCtrl'
         })
         .state('/AddLead', {
             url: '/AddLead',
             templateUrl: 'partials/addLead.html',
-            controller: 'addLead'
+            controller: 'addLeadCtrl'
         })
         .state('/Customers', {
             url: '/Customers',
             templateUrl: 'partials/customers.html',
-            controller: 'customerController'
+            controller: 'customerControllerCtrl'
         })
         .state('/EditLead', {
             url: '/EditLead/:leadID',
             templateUrl: 'partials/addLead.html',
-            controller: 'editLead'
+            controller: 'editLeadCtrl'
         })
         .state('/ProjectDetails', {
             url: '/ProjectDetails/:leadID',
             templateUrl: 'partials/projectDetails.html',
-            controller: 'projectDetails'
+            controller: 'projectDetailsCtrl'
         })
         .state('/ConvertCustomer', {
             url: '/ConvertCustomer/:action/:leadID',
             templateUrl: 'partials/convertCustomer.html',
-            controller: 'convertCustomer'
+            controller: 'convertCustomerCtrl'
         })
         .state('/AddAgent', {
             url: '/AddAgent',
             templateUrl: 'partials/addAgent.html',
-            controller: 'addAgentController'
+            controller: 'addAgentControllerCtrl'
         })
         .state('/Agents', {
             url: '/Agents',
             templateUrl: 'partials/agents.html',
-            controller: 'agentsController'
+            controller: 'agentsCtrl'
         })
         .state('/EditAgent', {
             url: '/EditAgent/:agentID',
             templateUrl: 'partials/addAgent.html',
-            controller: 'editAgentController'
+            controller: 'editAgentControllerCtrl'
         })
-        .state('/UnitAllocation', {
-            url: '/UnitAllocation',
-            templateUrl: 'partials/unitAllocation.html',
-            controller: 'unitAllocation'
+        .state('/ProspectsUnitAllocation', {
+            url: '/ProspectsUnitAllocation',
+            templateUrl: 'partials/prospectsUnitAllocation.html',
+            controller: 'prospectsUnitAllocationCtrl'
         })
         .state('/Projects', {
             url: '/Projects',
             templateUrl: 'partials/projects.html',
-            controller: 'projects'
+            controller: 'projectsCtrl'
         })
         .state('/AddProject', {
             url: '/AddProject',
             templateUrl: 'partials/addProject.html',
-            controller: 'addProject'
+            controller: 'addProjectCtrl'
         })
         .state('/EditProject', {
             url: '/EditProject/:projId',
             templateUrl: 'partials/addProject.html',
-            controller: 'editProject'
+            controller: 'editProjectCtrl'
         })
         .state('/Phases', {
             url: '/Phases',
             templateUrl: 'partials/phases.html',
-            controller: 'phases'
+            controller: 'phasesCtrl'
         })
         .state('/AccessRights', {
             url: '/AccessRights',
-            templateUrl: 'partials/AccessRights.html',
-            controller: 'AccessRights'
+            templateUrl: 'partials/accessRights.html',
+            controller: 'accessRightsCtrl'
         })
         .state('/AddPhases', {
             url: '/AddPhases/:projId',
             templateUrl: 'partials/addPhases.html',
-            controller: 'addPhases'
+            controller: 'addPhasesCtrl'
         })
         .state('/EditPhases', {
             url: '/EditPhases/:projId/:phaseId',
             templateUrl: 'partials/addPhases.html',
-            controller: 'editPhases'
+            controller: 'editPhasesCtrl'
         })
         .state('/AddUnit', {
             url: '/AddUnit/:projId/:phaseId',
             templateUrl: 'partials/addUnit.html',
-            controller: 'addUnit'
+            controller: 'addUnitCtrl'
         })
         .state('/EditUnit', {
             url: '/EditUnit/:projId/:phaseId',
             templateUrl: 'partials/addUnit.html',
-            controller: 'editUnit'
+            controller: 'editUnitCtrl'
         })
         .state('/UnitGeneration', {
             url: '/UnitGeneration/:projId/:phaseId',
             templateUrl: 'partials/unitGeneration.html',
-            controller: 'unitGeneration'
+            controller: 'unitGenerationCtrl'
         })
         .state('/Units', {
             url: '/Units/:projId/:phaseId/:blockId',
             templateUrl: 'partials/units.html',
-            controller: 'units'
+            controller: 'unitsCtrl'
         })
-		.state('/CostSheetTemplate', {
+        .state('/CostSheetTemplate', {
             url: '/CostSheetTemplate',
             templateUrl: 'partials/costSheetTemplate.html',
-            controller: 'costSheetTemplate'
+            controller: 'costSheetTemplateCtrl'
         })
-		.state('/BlockCostSheet', {
+        .state('/BlockCostSheet', {
             url: '/BlockCostSheet',
             templateUrl: 'partials/blockCostSheet.html',
-            controller: 'blockCostSheet'
+            controller: 'blockCostSheetCtrl'
         })
-		.state('/EditBlockCostSheet', {
+        .state('/EditBlockCostSheet', {
             url: '/EditBlockCostSheet/:blockId',
             templateUrl: 'partials/editBlockCostSheet.html',
-            controller: 'editBlockCostSheet'
+            controller: 'editBlockCostSheetCtrl'
         })
-		.state('/EditCostSheetTemplate', {
+        .state('/EditCostSheetTemplate', {
             url: '/EditCostSheetTemplate/:templateId',
             templateUrl: 'partials/costSheetTemplate.html',
-            controller: 'costSheetTemplate'
+            controller: 'costSheetTemplateCtrl'
         })
         .state('/CostSheetTemplates', {
             url: '/CostSheetTemplates',
-            templateUrl: 'partials/CostSheetTemplates.html',
-            controller: 'costSheetTemplates'
+            templateUrl: 'partials/costSheetTemplates.html',
+            controller: 'costSheetTemplatesCtrl'
         })
         .state('/BlockStage', {
             url: '/BlockStage',
-            templateUrl: 'partials/BlockStage.html',
-            controller: 'blockStageController'
+            templateUrl: 'partials/blockStage.html',
+            controller: 'blockStageControllerCtrl'
         })
         .state('/PaymentSchedule', {
             url: '/PaymentSchedule',
             templateUrl: 'partials/paymentSchedule.html',
-            controller: 'paymentScheduleController'
+            controller: 'paymentScheduleCtrl'
         })
         .state('/EmployeeDetails', {
             url: '/EmployeeDetails',
             templateUrl: 'partials/employeeDetails.html',
-            controller: 'employeeDetailsController'
+            controller: 'employeeDetailsCtrl'
         })
         .state('/AddEmployee', {
             url: '/AddEmployee',
             templateUrl: 'partials/addEmployee.html',
-            controller: 'addEmployeeController'
+            controller: 'addEmployeeCtrl'
         })
         .state('/EditEmployee', {
             url: '/EditEmployee/:employeeId',
             templateUrl: 'partials/addEmployee.html',
-            controller: 'editEmployeeController'
+            controller: 'editEmployeeCtrl'
         })
-       .state('/Heirarchy', {
+        .state('/Heirarchy', {
             url: '/Heirarchy',
-            templateUrl: 'partials/Heirarchy.html',
-            controller: 'heirarchyController'
+            templateUrl: 'partials/heirarchy.html',
+            controller: 'heirarchyCtrl'
         })
         .state('/SalaryComponentDetails', {
             url: '/SalaryComponentDetails',
             templateUrl: 'partials/salaryComponentDetails.html',
-            controller: 'salaryComponentDetailsController'
+            controller: 'salaryComponentDetailsCtrl'
         })
         .state('/AddSalaryComponent', {
             url: '/AddSalaryComponent',
             templateUrl: 'partials/addSalaryComponent.html',
-            controller: 'addSalaryComponentController'
+            controller: 'addSalaryComponentCtrl'
         })
         .state('/EditSalaryComponent', {
             url: '/EditSalaryComponent/:salaryHeadId',
             templateUrl: 'partials/addSalaryComponent.html',
-            controller: 'editSalaryComponentController'
+            controller: 'editSalaryComponentCtrl'
         })
         .state('/AddDepartment', {
             url: '/AddDepartment',
             templateUrl: 'partials/addDepartment.html',
-            controller: 'addDepartmentController'
+            controller: 'addDepartmentCtrl'
         })
-		.state('/ApplyCostSheet', {
+        .state('/ApplyCostSheet', {
             url: '/ApplyCostSheet/:projectId/:phaseId/:blockId',
             templateUrl: 'partials/applyCostSheet.html',
-            controller: 'applyCostSheet'
+            controller: 'applyCostSheetCtrl'
         })
         .state('/GenerateCostSheet', {
             url: '/GenerateCostSheet/:blockId',
             templateUrl: 'partials/generateCostSheet.html',
-            controller: 'generateCostSheet'
+            controller: 'generateCostSheetCtrl'
         })
-		.state('/Attendance', {
+        .state('/Attendance', {
             url: '/Attendance',
             templateUrl: 'partials/attendance.html',
-            controller: 'attendance'
+            controller: 'attendanceCtrl'
         })
         .state('/UnitsListing', {
             url: '/UnitsListing',
             templateUrl: 'partials/unitsListing.html',
-            controller: 'unitsListingController'
+            controller: 'unitsListingCtrl'
         })
         .state('/AlertRules', {
             url: '/AlertRules',
             templateUrl: 'partials/alertRules.html',
-            controller: 'alertRules'
+            controller: 'alertRulesCtrl'
         })
         .state('/CreateNewRule', {
             url: '/CreateNewRule',
             templateUrl: 'partials/createNewRule.html',
-            controller: 'createNewRule'
+            controller: 'createNewRuleCtrl'
         })
         .state('/SalesFunnel', {
             url: '/SalesFunnel',
             templateUrl: 'partials/salesFunnelListing.html',
-            controller: 'salesFunnelController'
+            controller: 'salesFunnelControllerCtrl'
         })
         .state('/Prospects', {
             url: '/Prospects',
             templateUrl: 'partials/prospects.html',
-            controller: 'updateProspects'
+            controller: 'updateProspectsCtrl'
         })
-//        .state('/UpdateProspects', {
-//            url: '/UpdateProspects',
-//            templateUrl: 'partials/updateProspects.html',
-//            controller: 'updateProspects'
-//        })
-//        
+        /*.state('/UpdateProspects', {
+            url: '/UpdateProspects',
+            templateUrl: 'partials/updateProspects.html',
+            controller: 'updateProspectsCtrl'
+        })*/
         .state('/AddProspect', {
             url: '/AddProspect',
             templateUrl: 'partials/addProspect.html',
-            controller: 'addProspect'
+            controller: 'addProspectCtrl'
         })
         .state('/EditProspect', {
             url: '/EditProspect/:leadID',
             templateUrl: 'partials/addProspect.html',
-            controller: 'editProspect'
+            controller: 'editProspectCtrl'
         })
         .state('/SiteVisitListing', {
             url: '/SiteVisitListing',
             templateUrl: 'partials/siteVisitListing.html',
-            controller: 'siteVisitListingController'
+            controller: 'siteVisitListingCtrl'
         })
-		.state('/UpdateRule', {
+        .state('/UpdateRule', {
             url: '/UpdateRule/:ruleId/:moduleId',
             templateUrl: 'partials/updateRule.html',
             controller: 'updateRuleCtrl'

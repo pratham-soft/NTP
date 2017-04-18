@@ -1,4 +1,4 @@
-app.controller("convertCustomer", function($scope, $http, $compile, $cookieStore, $stateParams, $filter, $state) {
+app.controller("convertCustomerCtrl", function($scope, $http, $compile, $cookieStore, $stateParams, $filter, $state) {
     ($scope.convertCustomer = function() {
         angular.element(".loader").show();
         $scope.leadId = $stateParams.leadID;

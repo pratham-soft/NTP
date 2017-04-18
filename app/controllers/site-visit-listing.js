@@ -1,4 +1,4 @@
-app.controller("siteVisitListingController", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
+app.controller("siteVisitListingCtrl", function($scope, $http, $state, $cookieStore, $stateParams, $filter) {
     ($scope.getSiteVisitDetail = function() {
         angular.element(".loader").show();
         $http({
